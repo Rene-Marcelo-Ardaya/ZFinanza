@@ -1,0 +1,117 @@
+/**
+ * UsuarioCard.css
+ * Estilos para las cards de usuarios en vista móvil
+ */
+
+.usuario-card {
+    background: var(--ds-panelBg, #ffffff);
+    border: 1px solid var(--ds-surfaceBorder, #e5e7eb);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.usuario-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.usuario-card--inactivo {
+    opacity: 0.7;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+/* Header */
+.usuario-card__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ds-surfaceBorder, #f3f4f6);
+}
+
+.usuario-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--ds-infoBg, #e2ecfb);
+    color: var(--ds-infoText, #1e4b87);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.usuario-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.usuario-card__nombre {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ds-primaryText, #111827);
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.usuario-card__email {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--ds-secondaryText, #6b7280);
+}
+
+.usuario-card__email svg {
+    flex-shrink: 0;
+}
+
+.usuario-card__email span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Body */
+.usuario-card__body {
+    display: flex;
+    gap: 16px;
+}
+
+.usuario-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+}
+
+.usuario-card__label {
+    color: var(--ds-secondaryText, #6b7280);
+}
+
+.usuario-card__value {
+    color: var(--ds-primaryText, #111827);
+    font-weight: 500;
+}
+
+/* Footer */
+.usuario-card__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid var(--ds-surfaceBorder, #f3f4f6);
+}
+
+.usuario-card__actions {
+    display: flex;
+    gap: 8px;
+}

@@ -1,0 +1,458 @@
+/**
+ * DSResponsiveTable.css
+ * Estilos para el componente de tabla responsive
+ */
+
+/* =============================================
+   CONTENEDOR PRINCIPAL
+============================================= */
+
+.ds-responsive-table__table-wrapper {
+    width: 100%;
+}
+
+/* =============================================
+   SECCIÓN DE CARDS
+============================================= */
+
+.ds-responsive-table__cards-section {
+    padding: 8px 0;
+}
+
+/* Grid de cards */
+.ds-responsive-table__cards-grid {
+    display: grid;
+    gap: 16px;
+    padding: 8px 0;
+}
+
+/* =============================================
+   ESTADO VACÍO
+============================================= */
+
+.ds-responsive-table__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--ds-secondaryText, #9ca3af);
+}
+
+.ds-responsive-table__empty-icon {
+    margin-bottom: 16px;
+    color: var(--ds-tertiaryText, #d1d5db);
+}
+
+.ds-responsive-table__empty-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ds-secondaryText, #6b7280);
+    margin-bottom: 8px;
+}
+
+.ds-responsive-table__empty-desc {
+    font-size: 0.9rem;
+    color: var(--ds-tertiaryText, #9ca3af);
+}
+
+/* =============================================
+   CONTADOR DE REGISTROS
+============================================= */
+
+.ds-responsive-table__count {
+    background: var(--ds-surfaceBg, #f3f4f6);
+    color: var(--ds-secondaryText, #6b7280);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid var(--ds-surfaceBorder, #e5e7eb);
+}
+
+/* =============================================
+   RESPONSIVE - Breakpoints
+============================================= */
+
+/* Móvil y Tablet: Ocultar tabla, mostrar cards */
+@media (max-width: 1024px) {
+
+    /* Ocultar el wrapper de la tabla */
+    .ds-responsive-table__table-wrapper,
+    .ds-responsive-table__table-wrapper * {
+        display: none !important;
+    }
+
+    /* Mostrar la sección de cards */
+    .ds-responsive-table__cards-section {
+        display: block !important;
+    }
+
+    /* Asegurar que el grid de cards sea visible */
+    .ds-responsive-table__cards-grid {
+        display: grid !important;
+    }
+}
+
+/* Móvil: 1 columna */
+@media (max-width: 767px) {
+    .ds-responsive-table__cards-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .ds-responsive-table__cards-section {
+        padding: 4px 0;
+    }
+}
+
+/* Tablet: 2 columnas */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .ds-responsive-table__cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Desktop: Ocultar cards, mostrar tabla */
+@media (min-width: 1025px) {
+    .ds-responsive-table__cards-section {
+        display: none !important;
+    }
+
+    .ds-responsive-table__table-wrapper {
+        display: block !important;
+    }
+}
+
+/* =============================================
+   UTILIDADES PARA CARDS PERSONALIZADAS
+============================================= */
+
+/* Clase base para cards */
+.ds-card,
+.ds-responsive-card {
+    background: var(--ds-panelBg, #ffffff);
+    border: 1px solid var(--ds-panelBorder, #e5e7eb);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+    box-shadow: var(--ds-shadowSm, 0 1px 3px rgba(0, 0, 0, 0.05));
+}
+
+.ds-card:hover,
+.ds-responsive-card:hover {
+    box-shadow: var(--ds-shadowMd, 0 4px 12px rgba(0, 0, 0, 0.1));
+    transform: translateY(-2px);
+}
+
+.ds-card--anulado,
+.ds-responsive-card--anulado {
+    opacity: 0.7;
+    background: var(--ds-errorBg, #fef2f2);
+    border-color: var(--ds-errorBorder, #fecaca);
+}
+
+/* Header de card */
+.ds-card__header,
+.ds-responsive-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ds-divider, #f3f4f6);
+}
+
+.ds-card__title-text,
+.ds-responsive-card__title-text {
+    font-size: 0.97rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.ds-card__body,
+.ds-responsive-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ds-card__row,
+.ds-responsive-card__row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.ds-card__label,
+.ds-responsive-card__label {
+    color: var(--ds-secondaryText, #6b7280);
+    font-weight: 600;
+    font-size: 0.82rem;
+    min-width: 72px;
+    flex: 0 0 auto;
+}
+
+.ds-card__value,
+.ds-responsive-card__value {
+    color: var(--ds-primaryText, #111827);
+    font-size: 0.88rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+/* Footer de card */
+.ds-card__footer,
+.ds-responsive-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--ds-divider, #f3f4f6);
+    gap: 12px;
+}
+
+/* Botones de acción en cards */
+.ds-responsive-table__cards-grid .ds-card__actions,
+.ds-card__actions,
+.ds-responsive-table__cards-grid .ds-responsive-card__actions,
+.ds-responsive-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: stretch;
+    justify-content: flex-end;
+}
+
+.ds-responsive-table__cards-grid .ds-card__actions > .secured-button-wrapper,
+.ds-card__actions > .secured-button-wrapper,
+.ds-responsive-table__cards-grid .ds-responsive-card__actions > .secured-button-wrapper,
+.ds-responsive-card__actions > .secured-button-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 96px;
+}
+
+.ds-responsive-table__cards-grid .ds-card__actions > .secured-button-wrapper > .ds-button,
+.ds-card__actions > .secured-button-wrapper > .ds-button,
+.ds-responsive-table__cards-grid .ds-responsive-card__actions > .secured-button-wrapper > .ds-button,
+.ds-responsive-card__actions > .secured-button-wrapper > .ds-button {
+    width: 100%;
+}
+
+.ds-responsive-table__cards-grid .ds-card__action-btn,
+.ds-card__action-btn,
+.ds-responsive-table__cards-grid .ds-card__actions > .ds-button.ds-card__action-btn,
+.ds-card__actions > .ds-button.ds-card__action-btn,
+.ds-responsive-table__cards-grid .ds-card__actions > .secured-button-wrapper > .ds-card__action-btn,
+.ds-card__actions > .secured-button-wrapper > .ds-card__action-btn,
+.ds-responsive-table__cards-grid .ds-card__actions > .ds-card__action-btn,
+.ds-card__actions > .ds-card__action-btn,
+.ds-responsive-table__cards-grid .ds-responsive-card__actions > .ds-card__action-btn,
+.ds-responsive-card__actions > .ds-card__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--ds-surfaceBg, #f3f4f6);
+    color: var(--ds-primaryText, #374151);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 38px;
+    line-height: 1.2;
+    flex: 1 1 auto;
+    min-width: 96px;
+}
+
+.ds-card__action-btn:active {
+    transform: scale(0.95);
+}
+
+.ds-card__action-btn:hover:not(:disabled) {
+    filter: brightness(0.98);
+}
+
+.ds-card__action-btn--primary {
+    background: var(--ds-infoBg, #eff6ff);
+    color: var(--ds-infoText, #2563eb);
+    border-color: var(--ds-infoBorder, #bfdbfe);
+}
+
+.ds-card__action-btn--danger {
+    background: var(--ds-errorBg, #fef2f2);
+    color: var(--ds-errorText, #dc2626);
+    border-color: var(--ds-errorBorder, #fecaca);
+}
+
+.ds-card__action-btn--success {
+    background: var(--ds-successBg, #f0fdf4);
+    color: var(--ds-successText, #16a34a);
+    border-color: var(--ds-successBorder, #bbf7d0);
+}
+
+.ds-card__action-btn--upload {
+    background: var(--ds-surfaceBg, #f3f4f6);
+    color: var(--ds-secondaryText, #6b7280);
+    border: 1px dashed var(--ds-surfaceBorder, #d1d5db);
+}
+
+@media (max-width: 520px) {
+    .ds-responsive-table__cards-grid .ds-card__actions,
+    .ds-card__actions,
+    .ds-responsive-table__cards-grid .ds-responsive-card__actions,
+    .ds-responsive-card__actions {
+        width: 100%;
+    }
+
+    .ds-responsive-table__cards-grid .ds-card__actions > .secured-button-wrapper,
+    .ds-card__actions > .secured-button-wrapper,
+    .ds-responsive-table__cards-grid .ds-responsive-card__actions > .secured-button-wrapper,
+    .ds-responsive-card__actions > .secured-button-wrapper {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+    }
+
+    .ds-responsive-table__cards-grid .ds-card__action-btn,
+    .ds-card__action-btn,
+    .ds-responsive-table__cards-grid .ds-card__actions > .ds-button.ds-card__action-btn,
+    .ds-card__actions > .ds-button.ds-card__action-btn,
+    .ds-responsive-table__cards-grid .ds-card__actions > .secured-button-wrapper > .ds-card__action-btn,
+    .ds-card__actions > .secured-button-wrapper > .ds-card__action-btn,
+    .ds-responsive-table__cards-grid .ds-card__actions > .ds-card__action-btn,
+    .ds-card__actions > .ds-card__action-btn,
+    .ds-responsive-table__cards-grid .ds-responsive-card__actions > .ds-card__action-btn,
+    .ds-responsive-card__actions > .ds-card__action-btn {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+    }
+}
+
+/* =============================================
+   PAGINACIÓN
+============================================= */
+
+.ds-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0;
+    border-top: 1px solid var(--ds-panelBorder, #e5e7eb);
+    margin-top: 16px;
+}
+
+.ds-pagination__info {
+    font-size: 0.85rem;
+    color: var(--ds-secondaryText, #6b7280);
+    font-weight: 500;
+}
+
+.ds-pagination__controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ds-pagination__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--ds-panelBorder, #e5e7eb);
+    border-radius: 8px;
+    background: var(--ds-panelBg, #ffffff);
+    color: var(--ds-primaryText, #374151);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ds-pagination__btn:hover:not(:disabled) {
+    background: var(--ds-accentLight, #eff6ff);
+    border-color: var(--ds-accent, #2563eb);
+    color: var(--ds-accent, #2563eb);
+}
+
+.ds-pagination__btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.ds-pagination__pages {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0 8px;
+}
+
+.ds-pagination__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border: 1px solid var(--ds-panelBorder, #e5e7eb);
+    border-radius: 8px;
+    background: var(--ds-panelBg, #ffffff);
+    color: var(--ds-primaryText, #374151);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ds-pagination__page:hover:not(.ds-pagination__page--active) {
+    background: var(--ds-accentLight, #eff6ff);
+    border-color: var(--ds-accent, #2563eb);
+    color: var(--ds-accent, #2563eb);
+}
+
+.ds-pagination__page--active {
+    background: var(--ds-accent, #2563eb);
+    border-color: var(--ds-accent, #2563eb);
+    color: var(--ds-selectionText, #ffffff);
+}
+
+.ds-pagination__ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    color: var(--ds-secondaryText, #9ca3af);
+    font-size: 0.85rem;
+}
+
+/* Responsive paginación */
+@media (max-width: 767px) {
+    .ds-pagination {
+        padding: 12px 0;
+    }
+
+    .ds-pagination__btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .ds-pagination__page {
+        min-width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+
+    .ds-pagination__pages {
+        gap: 2px;
+        margin: 0 4px;
+    }
+}

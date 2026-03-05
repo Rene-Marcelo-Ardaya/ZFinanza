@@ -1,0 +1,52 @@
+{
+  "name": "react-vite-base",
+  "private": true,
+  "version": "1.0.0",
+  "description": "React + Vite Base Project with Design System",
+  "type": "module",
+  "author": "Rene Marcelo Oruño Ardaya & Junior Aguilar Leaños",
+  "contributors": [
+    {
+      "name": "Rene Marcelo Oruño Ardaya",
+      "url": "https://www.linkedin.com/in/rene-marcelo-ardaya/"
+    },
+    {
+      "name": "Junior Aguilar Leaños",
+      "url": "https://www.facebook.com/junior.leanos.152602/"
+    }
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "axios": "^1.13.2",
+    "dexie": "^4.2.1",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
+    "laravel-echo": "^2.2.6",
+    "lucide-react": "^0.556.0",
+    "prop-types": "^15.8.1",
+    "pusher-js": "^8.4.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.11.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "^7.2.4",
+    "vite-plugin-pwa": "^1.2.0"
+  }
+}

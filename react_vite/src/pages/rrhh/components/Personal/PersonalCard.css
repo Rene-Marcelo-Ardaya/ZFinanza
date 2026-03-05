@@ -1,0 +1,111 @@
+/**
+ * PersonalCard.css
+ * Estilos para las cards de personal en vista móvil
+ */
+
+.personal-card {
+    background: var(--ds-panelBg, #ffffff);
+    border: 1px solid var(--ds-surfaceBorder, #e5e7eb);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.personal-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Header */
+.personal-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ds-surfaceBorder, #f3f4f6);
+}
+
+.personal-card__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ds-infoBg, #e2ecfb);
+    color: var(--ds-infoText, #1e4b87);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.personal-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.personal-card__nombre {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ds-primaryText, #111827);
+    margin: 0 0 2px 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.personal-card__ci {
+    font-size: 0.8rem;
+    color: var(--ds-secondaryText, #6b7280);
+}
+
+/* Body */
+.personal-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.personal-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--ds-primaryText, #374151);
+}
+
+.personal-card__meta svg {
+    color: var(--ds-secondaryText, #6b7280);
+    flex-shrink: 0;
+}
+
+.personal-card__cargo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    background: var(--ds-infoBg, #e2ecfb);
+    color: var(--ds-infoText, #1e4b87);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Footer */
+.personal-card__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid var(--ds-surfaceBorder, #f3f4f6);
+}
+
+.personal-card__actions {
+    display: flex;
+    gap: 8px;
+}

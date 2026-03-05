@@ -1,0 +1,340 @@
+/**
+ * UserMenu.css
+ * Menú de usuario en el header: dropdown en desktop, bottom-sheet en móvil
+ * Compatible con dark mode usando tokens var(--ds-*)
+ */
+
+/* =============================================
+   TRIGGER - Botón avatar circular
+============================================= */
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu__trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.user-menu__avatar {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    background: var(--ds-activeBg, #eff6ff);
+    color: var(--ds-fieldBorderFocus, #2563eb);
+    border: 2px solid var(--ds-fieldBorder, #c2d3ef);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.user-menu__avatar-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.user-menu__trigger:hover .user-menu__avatar,
+.user-menu__trigger[aria-expanded="true"] .user-menu__avatar {
+    border-color: var(--ds-fieldBorderFocus, #2563eb);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    transform: scale(1.05);
+}
+
+/* =============================================
+   OVERLAY - Para cerrar en móvil
+============================================= */
+
+.user-menu__overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 1099;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.user-menu__overlay.is-visible {
+    display: block;
+    opacity: 1;
+}
+
+/* =============================================
+   DROPDOWN - Desktop (>768px)
+============================================= */
+
+.user-menu__dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: 280px;
+    background: var(--ds-panelBg, #ffffff);
+    border: 1px solid var(--ds-panelBorder, #e2e8f0);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    z-index: 1100;
+    overflow: hidden;
+    animation: userMenuFadeIn 0.15s ease-out;
+}
+
+@keyframes userMenuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =============================================
+   HEADER del dropdown - Info de usuario
+============================================= */
+
+.user-menu__header {
+    padding: 16px;
+    background: linear-gradient(135deg,
+            var(--ds-surfaceBg, #f8fafc) 0%,
+            var(--ds-activeBg, #eff6ff) 100%);
+    border-bottom: 1px solid var(--ds-panelBorder, #e2e8f0);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-menu__header-avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--ds-fieldBorderFocus, #2563eb);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.user-menu__header-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.user-menu__header-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ds-primaryText, #1e293b);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-menu__header-role {
+    font-size: 0.75rem;
+    color: var(--ds-secondaryText, #64748b);
+    text-transform: capitalize;
+    margin-top: 2px;
+}
+
+/* =============================================
+   ITEMS del menú
+============================================= */
+
+.user-menu__items {
+    padding: 8px;
+}
+
+.user-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    color: var(--ds-primaryText, #334155);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    text-align: left;
+}
+
+.user-menu__item:hover {
+    background: var(--ds-hoverBg, #f1f5f9);
+}
+
+.user-menu__item:active {
+    transform: scale(0.98);
+}
+
+.user-menu__item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.user-menu__item-icon--theme {
+    background: var(--ds-activeBg, #eff6ff);
+    color: var(--ds-fieldBorderFocus, #2563eb);
+}
+
+.user-menu__item-icon--font {
+    background: var(--ds-surfaceBg, #f8fafc);
+    color: var(--ds-secondaryText, #64748b);
+}
+
+.user-menu__item-text {
+    flex: 1;
+}
+
+.user-menu__item-label {
+    display: block;
+    font-weight: 500;
+}
+
+.user-menu__item-desc {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ds-tertiaryText, #94a3b8);
+    margin-top: 1px;
+}
+
+/* Tema selector inline */
+.user-menu__theme-select {
+    padding: 5px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--ds-fieldBorder, #e2e8f0);
+    background: var(--ds-fieldBg, #ffffff);
+    color: var(--ds-fieldText, #334155);
+    font-size: 0.8rem;
+    font-family: inherit;
+    cursor: pointer;
+    min-width: 90px;
+}
+
+.user-menu__theme-select:focus {
+    outline: none;
+    border-color: var(--ds-fieldBorderFocus, #2563eb);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Separador */
+.user-menu__divider {
+    height: 1px;
+    background: var(--ds-panelBorder, #e2e8f0);
+    margin: 4px 12px;
+}
+
+/* Cerrar sesión */
+.user-menu__item--danger {
+    color: var(--ds-errorText, #dc2626);
+}
+
+.user-menu__item--danger:hover {
+    background: var(--ds-errorBg, #fef2f2);
+}
+
+.user-menu__item--danger .user-menu__item-icon {
+    background: var(--ds-errorBg, #fef2f2);
+    color: var(--ds-errorText, #dc2626);
+}
+
+/* =============================================
+   RESPONSIVE - Móvil (<768px)
+============================================= */
+
+@media (max-width: 768px) {
+    .user-menu__dropdown {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        max-height: 70vh;
+        animation: userMenuSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    @keyframes userMenuSlideUp {
+        from {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Handle visual del bottom-sheet */
+    .user-menu__dropdown::before {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 4px;
+        background: var(--ds-tertiaryText, #cbd5e1);
+        border-radius: 2px;
+        margin: 10px auto 6px;
+    }
+
+    .user-menu__header {
+        padding: 12px 20px 16px;
+    }
+
+    .user-menu__items {
+        padding: 8px 12px 16px;
+    }
+
+    .user-menu__item {
+        padding: 14px 12px;
+        font-size: 0.95rem;
+        min-height: 48px;
+    }
+
+    .user-menu__item-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .user-menu__overlay.is-visible {
+        display: block;
+        opacity: 1;
+    }
+}
+
+/* =============================================
+   RESPONSIVE - Tablet (768-1024px)
+============================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .user-menu__dropdown {
+        width: 260px;
+        right: 0;
+    }
+}

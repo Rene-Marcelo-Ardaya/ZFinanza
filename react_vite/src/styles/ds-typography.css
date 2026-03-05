@@ -1,0 +1,34 @@
+/**
+ * DS Typography Variables
+ * Definition of global font sizes (doubled as per requirement)
+ */
+
+:root {
+  /* 
+   * Global Font Scale Factor
+   * Default is 1. Can be adjusted via JavaScript (e.g., user preferences).
+   * Range suggestions: 0.75 (75%) to 1.5 (150%)
+   */
+  --ds-font-scale: 1;
+
+  /* 
+   * Font Size Scale (Original values with dynamic scaling)
+   */
+  --ds-font-3xs: calc(12px * var(--ds-font-scale));
+  --ds-font-2xs: calc(13px * var(--ds-font-scale));
+  --ds-font-xs: calc(16px * var(--ds-font-scale));
+  --ds-font-sm: calc(17px * var(--ds-font-scale));
+  --ds-font-md: calc(18px * var(--ds-font-scale));
+  --ds-font-lg: calc(19px * var(--ds-font-scale));
+  --ds-font-xl: calc(20px * var(--ds-font-scale));
+  --ds-font-xl2: calc(20px * var(--ds-font-scale));
+  --ds-font-2xl: calc(22px * var(--ds-font-scale));
+  --ds-font-3xl: calc(26px * var(--ds-font-scale));
+  --ds-font-hero: calc(66px * var(--ds-font-scale));
+
+  /* Additional sizes */
+  --ds-font-4xs: calc(11px * var(--ds-font-scale));
+  --ds-font-display-sm: calc(32px * var(--ds-font-scale));
+  --ds-font-display-md: calc(34px * var(--ds-font-scale));
+  --ds-font-display-lg: calc(38px * var(--ds-font-scale));
+}

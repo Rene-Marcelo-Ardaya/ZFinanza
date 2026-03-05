@@ -1,0 +1,115 @@
+/* 
+ * Override global para componentes legacy (Tablas y Filtros antiguos)
+ * Fuerza el uso de variables de tema en inputs, selects y tablas que no usan DSComponents.
+ * Cubre: Diesel, Lluvia, Cosechas, Viajes, Camiones, RRHH, Sistemas.
+ */
+
+/* =========================================
+   TABLAS Y CONTENEDORES
+   ========================================= */
+
+/* Forzar fondo de tablas y headers */
+table, .table, .data-table {
+    background-color: var(--ds-surfaceBg, #ffffff) !important;
+    color: var(--ds-primaryText, #1f2d3d) !important;
+}
+
+thead, th, .table-header {
+    background-color: var(--ds-tableHeaderBg, #f8fafc) !important;
+    color: var(--ds-panelHeaderText, #0f1f33) !important;
+    border-bottom-color: var(--ds-surfaceBorder, #e2e8f0) !important;
+}
+
+tbody, td, .table-row {
+    background-color: var(--ds-tableBg, #ffffff) !important;
+    color: var(--ds-primaryText, #334155) !important;
+    border-bottom-color: var(--ds-surfaceBorder, #e2e8f0) !important;
+}
+
+/* Filas alternas o hover */
+tbody tr:hover, .table-row:hover {
+    background-color: var(--ds-tableRowHover, #f1f5f9) !important;
+}
+
+/* =========================================
+   FILTROS Y INPUTS (Legacy)
+   ========================================= */
+
+/* Selectores agresivos para atrapar inputs en cualquier contenedor de filtro */
+[class*="filter"] input, 
+[class*="search"] input,
+[class*="filter"] select,
+[class*="search"] select,
+.form-control,
+.form-select,
+input[type="text"],
+input[type="search"],
+input[type="date"],
+input[type="number"],
+select {
+    background-color: var(--ds-fieldBg, #ffffff) !important;
+    color: var(--ds-fieldText, #1f2d3d) !important;
+    border-color: var(--ds-fieldBorder, #cbd5e1) !important;
+}
+
+/* Placeholder */
+::placeholder {
+    color: var(--ds-secondaryText, #94a3b8) !important;
+    opacity: 1;
+}
+
+/* Focus state */
+input:focus, select:focus, textarea:focus {
+    border-color: var(--ds-activeBg, #3b82f6) !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+    outline: none !important;
+}
+
+/* =========================================
+   PAGINACIÓN Y BOTONES
+   ========================================= */
+.pagination, .page-item, .page-link {
+    background-color: var(--ds-surfaceBg, #ffffff) !important;
+    border-color: var(--ds-surfaceBorder, #e2e8f0) !important;
+    color: var(--ds-primaryText, #334155) !important;
+}
+
+.page-link:hover {
+    background-color: var(--ds-hoverBg, #f1f5f9) !important;
+}
+
+.page-item.active .page-link {
+    background-color: var(--ds-activeBg, #3b82f6) !important;
+    color: #ffffff !important;
+    border-color: var(--ds-activeBg, #3b82f6) !important;
+}
+
+/* =========================================
+   MODALES Y CARDS LEGACY
+   ========================================= */
+.card, .panel {
+    background-color: var(--ds-panelBg, #ffffff) !important;
+    border-color: var(--ds-panelBorder, #e2e8f0) !important;
+    color: var(--ds-primaryText, #334155) !important;
+}
+
+.card-header, .panel-heading {
+    background-color: var(--ds-panelHeaderBg, #f8fafc) !important;
+    color: var(--ds-panelHeaderText, #0f1f33) !important;
+    border-bottom-color: var(--ds-panelBorder, #e2e8f0) !important;
+}
+
+.modal-content {
+    background-color: var(--ds-modalBg, #ffffff) !important;
+    color: var(--ds-primaryText, #334155) !important;
+}
+
+.modal-header {
+    background-color: var(--ds-modalHeaderBg, #f8fafc) !important;
+    border-bottom-color: var(--ds-surfaceBorder, #e2e8f0) !important;
+}
+
+.modal-footer {
+    background-color: var(--ds-surfaceBg, #f8fafc) !important;
+    border-top-color: var(--ds-surfaceBorder, #e2e8f0) !important;
+}

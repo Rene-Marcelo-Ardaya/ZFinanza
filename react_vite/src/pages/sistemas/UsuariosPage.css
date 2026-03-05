@@ -1,0 +1,37 @@
+/* Estilos para la barra de filtros en Usuarios */
+.usuarios-alert-margin {
+    margin-bottom: 24px;
+}
+
+.usuarios-filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    background: var(--ds-panelBg);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--ds-panelBorder);
+}
+
+.usuarios-filters__search {
+    flex: 1;
+    min-width: 250px;
+}
+
+.usuarios-filters__select {
+    min-width: 180px;
+}
+
+@media (max-width: 768px) {
+    .usuarios-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .usuarios-filters__search,
+    .usuarios-filters__select {
+        width: 100%;
+    }
+}

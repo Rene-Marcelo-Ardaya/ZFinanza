@@ -1,0 +1,290 @@
+/**
+ * DSTimeRangeField.css
+ * Estilos para el campo de rango de tiempo
+ * Usa las variables del tema DS y la tipografía definida
+ */
+
+.ds-time-range {
+    --ds-time-range-gap: 16px;
+    --ds-time-range-input-width: 140px;
+}
+
+.ds-time-range .ds-field__label {
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: var(--ds-primaryText, #1f2d3d);
+}
+
+.ds-time-range.has-error .ds-field__control {
+    border-color: var(--ds-errorText, #7a1f1f);
+    background-color: var(--ds-errorBg, #fde2e1);
+}
+
+.ds-time-range.has-error .ds-field__control:focus {
+    box-shadow: 0 0 0 3px rgba(122, 31, 31, 0.15);
+}
+
+/* Contenedor de inputs */
+.ds-time-range__inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ds-time-range-gap);
+    padding: 16px 20px;
+    background: var(--ds-fieldBg, #ffffff);
+    border: 1px solid var(--ds-fieldBorder, #8db2e3);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.ds-time-range__inputs:focus-within {
+    border-color: var(--ds-fieldBorderFocus, #3a6ea5);
+    box-shadow: 0 0 0 3px rgba(58, 110, 165, 0.15);
+}
+
+.ds-time-range__inputs:has(.ds-field__control:disabled) {
+    background-color: var(--ds-fieldDisabledBg, #e3eaf5);
+}
+
+/* Grupo de input (Inicio/Final) */
+.ds-time-range__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.ds-time-range__label {
+    font-size: var(--ds-font-xs, 12px);
+    color: var(--ds-secondaryText, #475569);
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Indicador AM/PM inteligente */
+.ds-time-range__ampm {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ds-highlightBg, #1e3a5f);
+    background: var(--ds-selectionBg, #c5d9f1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* 
+ * NUEVO: Estilos para el componente TimeInput24 (HH:MM numérico)
+ */
+.ds-time-input-24 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--ds-fieldBg, #ffffff);
+    border: 1px solid var(--ds-fieldBorder, #8db2e3);
+    border-radius: 6px;
+    padding: 4px 8px;
+    transition: all 0.2s;
+}
+
+.ds-time-input-24:focus-within {
+    border-color: var(--ds-fieldBorderFocus, #3a6ea5);
+    box-shadow: 0 0 0 2px rgba(58, 110, 165, 0.1);
+}
+
+.ds-time-input-24__field {
+    width: 70px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    background: transparent;
+    padding: 4px 0;
+    color: var(--ds-fieldText, #1f2d3d);
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* Quitar spinner en inputs number (Chrome/Safari/Edge/Opera) */
+.ds-time-input-24__field::-webkit-outer-spin-button,
+.ds-time-input-24__field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.ds-time-input-24__field[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.ds-time-input-24__field:focus {
+    outline: none;
+    background-color: rgba(58, 110, 165, 0.05);
+    border-radius: 4px;
+}
+
+.ds-time-input-24__sep {
+    font-weight: 700;
+    color: var(--ds-fieldBorder, #8db2e3);
+    margin-top: -2px;
+    /* Ajuste visual vertical */
+}
+
+/* Separador grande entre Inicio y Final */
+.ds-time-range__separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+.ds-time-range__arrow {
+    color: var(--ds-fieldBorder, #8db2e3);
+    font-size: var(--ds-font-2xl, 22px);
+    font-weight: 300;
+}
+
+/* Resultado calculado */
+.ds-time-range__result {
+    margin-top: 16px;
+}
+
+.ds-time-range__calculated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, var(--ds-selectionBg, #c5d9f1) 0%, var(--ds-infoBg, #e2ecfb) 100%);
+    border: 1px solid var(--ds-fieldBorder, #8db2e3);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.ds-time-range__calculated.has-value {
+    background: linear-gradient(135deg, var(--ds-highlightBg, #1e3a5f) 0%, var(--ds-primaryBg, #dfe8f6) 100%);
+    border-color: var(--ds-highlightBg, #1e3a5f);
+}
+
+.ds-time-range__result-label {
+    font-size: var(--ds-font-sm, 14px);
+    color: var(--ds-secondaryText, #475569);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.ds-time-range__calculated.has-value .ds-time-range__result-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ds-time-range__result-value {
+    font-size: var(--ds-font-lg, 18px);
+    color: var(--ds-highlightBg, #1e3a5f);
+    font-weight: 700;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+.ds-time-range__calculated.has-value .ds-time-range__result-value {
+    color: #ffffff;
+}
+
+/* Error state */
+.ds-field__error {
+    font-size: var(--ds-font-4xs, 11px);
+    color: var(--ds-errorText, #7a1f1f);
+    margin-top: 6px;
+    padding: 8px;
+    background-color: var(--ds-errorBg, #fde2e1);
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Help text */
+.ds-field__help {
+    font-size: var(--ds-font-4xs, 11px);
+    color: var(--ds-secondaryText, #475569);
+    margin-top: 6px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Required marker */
+.ds-field__required {
+    color: var(--ds-errorText, #7a1f1f);
+    margin-left: 2px;
+}
+
+/* Responsive - Tablets y móviles medianos */
+@media (max-width: 768px) {
+    .ds-time-range__inputs {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .ds-time-input-24 {
+        padding: 6px 10px;
+    }
+
+    .ds-time-input-24__field {
+        width: 48px;
+        /* Mejor tamaño para táctil */
+        font-size: 20px;
+        padding: 8px 0;
+    }
+
+    .ds-time-range__arrow {
+        font-size: 18px;
+    }
+
+    .ds-time-range__label {
+        font-size: 13px;
+    }
+}
+
+/* Responsive - Móviles pequeños */
+@media (max-width: 480px) {
+    .ds-time-range__inputs {
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .ds-time-range__separator {
+        transform: rotate(90deg);
+    }
+
+    .ds-time-input-24 {
+        padding: 8px 12px;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .ds-time-input-24__field {
+        width: 60px;
+        /* Más grande en móvil para facilitar toque */
+        font-size: 24px;
+        /* Fuente más grande */
+        padding: 10px 0;
+    }
+
+    .ds-time-input-24__sep {
+        font-size: 24px;
+    }
+
+    .ds-time-range__arrow {
+        font-size: 20px;
+    }
+
+    .ds-time-range__label {
+        font-size: 14px;
+        letter-spacing: 1.5px;
+    }
+
+    .ds-time-range__input-group {
+        gap: 10px;
+        width: 100%;
+    }
+}

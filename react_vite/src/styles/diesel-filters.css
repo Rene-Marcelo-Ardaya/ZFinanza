@@ -1,0 +1,105 @@
+/* 
+ * Estilos globales para filtros tipo "Diesel" (.diesel-filters)
+ * Utilizados en múltiples módulos: Diesel, Lluvia, Cosecha, Viajes, etc.
+ * Asegura compatibilidad con temas oscuros usando variables CSS.
+ */
+
+.diesel-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.diesel-filters__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+/* Campos individuales dentro de los filtros */
+.diesel-filters__field {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.diesel-filters__field--wide {
+    flex: 2;
+    min-width: 300px;
+}
+
+/* Inputs y Selects dentro de filtros diesel */
+.diesel-filters__field input,
+.diesel-filters__field select,
+.diesel-filters .ds-field__control {
+    background-color: var(--ds-fieldBg, #ffffff);
+    color: var(--ds-fieldText, #1f2d3d);
+    border: 1px solid var(--ds-fieldBorder, #b8c8e0);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: var(--ds-font-sm, 14px);
+    transition: all 0.2s ease;
+}
+
+.diesel-filters__field input:focus,
+.diesel-filters__field select:focus,
+.diesel-filters .ds-field__control:focus {
+    outline: none;
+    border-color: var(--ds-activeBg, #3b82f6);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.diesel-filters__field input::placeholder {
+    color: var(--ds-secondaryText, #64748b);
+}
+
+/* Labels */
+.diesel-filters__field label,
+.diesel-filters .ds-field__label {
+    font-size: var(--ds-font-xs, 13px);
+    font-weight: 600;
+    color: var(--ds-primaryText, #334155);
+}
+
+/* Botones de atajos (1 mes, 3 meses, etc) */
+.diesel-filters__shortcuts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--ds-surfaceBorder, #e2e8f0);
+}
+
+.diesel-filters__label {
+    font-size: var(--ds-font-xs, 13px);
+    color: var(--ds-secondaryText, #64748b);
+    margin-right: 8px;
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+    .diesel-filters__row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .diesel-filters__field,
+    .diesel-filters__field--wide {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .diesel-filters__shortcuts {
+        flex-direction: row; /* Mantener botones en fila si caben */
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+}

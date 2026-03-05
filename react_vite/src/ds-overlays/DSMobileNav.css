@@ -1,0 +1,127 @@
+/**
+ * DSMobileNav.css
+ * Estilos para el componente de navegación móvil DSMobileNav
+ * Compatible con iOS Safe Area
+ */
+
+/* =============================================
+   NAVEGACIÓN MÓVIL - Barra fija inferior
+   Compatible con iOS Safe Area
+============================================= */
+
+.dsmobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding: 8px 16px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    /* iOS Safe Area */
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* =============================================
+   DENTRO DE MODALES - Layout flex en vez de fixed
+   El DSMobileNav participa del flex layout del modal
+============================================= */
+
+.ds-modal .dsmobile-nav {
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: none;
+}
+
+.dsmobile-nav__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    min-width: 70px;
+    min-height: 56px;
+    transition: all 0.2s;
+}
+
+.dsmobile-nav__btn:active {
+    transform: scale(0.95);
+}
+
+.dsmobile-nav__btn span {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Variantes de botones */
+
+/* Botón Primario (Azul) */
+.dsmobile-nav__btn--primary {
+    color: #2563eb;
+}
+
+.dsmobile-nav__btn--primary:active {
+    background: #eff6ff;
+}
+
+/* Botón Secundario (Gris) */
+.dsmobile-nav__btn--secondary {
+    color: #6b7280;
+}
+
+.dsmobile-nav__btn--secondary:active {
+    background: #f3f4f6;
+}
+
+/* Botón Danger (Rojo) */
+.dsmobile-nav__btn--danger {
+    color: #dc2626;
+}
+
+.dsmobile-nav__btn--danger:active {
+    background: #fef2f2;
+}
+
+/* Botón Success (Verde) */
+.dsmobile-nav__btn--success {
+    color: #16a34a;
+}
+
+.dsmobile-nav__btn--success:active {
+    background: #f0fdf4;
+}
+
+/* Botón Deshabilitado */
+.dsmobile-nav__btn--disabled {
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.dsmobile-nav__btn--disabled:active {
+    transform: none;
+}
+
+/* Spinner de carga */
+.dsmobile-nav__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: dsmobile-nav-spin 0.6s linear infinite;
+}
+
+@keyframes dsmobile-nav-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

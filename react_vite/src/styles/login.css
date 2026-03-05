@@ -1,0 +1,256 @@
+/* LoginPage Styles - Split screen layout */
+
+.login-page {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Left Side: Toreto Logo - Full height, 60% width */
+.login-page__left {
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,
+      var(--ds-headerGradTop, #dbe6f7) 0%,
+      var(--ds-headerGradBottom, #c3d6f0) 100%);
+  padding: 0;
+  /* Removed padding to allow full coverage */
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.login-page__left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%,
+      rgba(255, 255, 255, 0.3) 0%,
+      transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.login-page__logo-toreto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Makes image cover entire container */
+  object-position: center;
+  position: relative;
+  z-index: 0;
+}
+
+/* Right Side: Form area - 40% width */
+.login-page__right {
+  width: 40%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: var(--ds-surfaceBg, #f5f7fb);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.login-page__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Logo HK - Above form */
+.login-page__logo-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.login-page__logo-hk {
+  max-height: 300px;
+  min-width: 250px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animación float para el logo */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.login-page__logo-hk:hover {
+  transform: scale(1.05);
+}
+
+/* Login Card */
+.login-page__card {
+  width: 100%;
+}
+
+.login-page__fields {
+  display: grid;
+  gap: 12px;
+}
+
+.login-page__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.login-page__btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 16px;
+  font-size: var(--ds-font-md);
+}
+
+/* Info Footer */
+.login-page__info {
+  text-align: center;
+  font-size: var(--ds-font-xs);
+  color: var(--ds-primaryText, #3b4c5f);
+  opacity: 0.7;
+}
+
+.login-page__info p {
+  margin: 0;
+}
+
+/* Responsive: Hide left panel on smaller screens */
+@media (max-width: 900px) {
+  .login-page {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .login-page__left {
+    display: none;
+    /* Hide Toreto logo panel on mobile */
+  }
+
+  .login-page__right {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page__right {
+    padding: 16px;
+  }
+
+  .login-page__content {
+    gap: 0;
+  }
+
+  .login-page__logo-top {
+    padding: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .login-page__logo-hk {
+    max-height: 150px;
+    min-width: unset;
+    max-width: 80vw;
+    width: auto;
+  }
+
+  .login-page__footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-login-enter {
+    width: 100%;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .login-page__logo-hk {
+    max-height: 350px;
+  }
+
+  .login-page__content {
+    max-width: 450px;
+  }
+}
+
+/* Botón Entrar - Rojo claro fijo (no cambia con tema) */
+.btn-login-enter {
+  flex: 1;
+  min-width: 100px;
+  padding: 12px 24px;
+  font-size: var(--ds-font-md);
+  font-weight: 600;
+  background: #e57373;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-login-enter:hover {
+  background: #ef5350;
+  transform: translateY(-1px);
+}
+
+.btn-login-enter:active {
+  background: #d32f2f;
+  transform: translateY(0);
+}
+
+.btn-login-enter:disabled {
+  background: #ef9a9a;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Link Olvidaste contraseña */
+.login-page__forgot-link {
+  font-size: var(--ds-font-sm);
+  color: var(--ds-primaryText, #3b4c5f);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.login-page__forgot-link:hover {
+  opacity: 1;
+  color: #e57373;
+  text-decoration: underline;
+}

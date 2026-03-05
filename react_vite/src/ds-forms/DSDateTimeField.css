@@ -1,0 +1,247 @@
+/**
+ * DSDateTimeField - Estilos del campo de fecha y hora
+ */
+
+.ds-datetime {
+    position: relative;
+    width: 100%;
+}
+
+.ds-datetime__control {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ds-datetime__control .ds-field__control {
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.ds-datetime__icon {
+    position: absolute;
+    right: 12px;
+    color: var(--ds-secondaryText, #6b7280);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.ds-datetime__clear {
+    position: absolute;
+    right: 38px;
+    background: none;
+    border: none;
+    color: var(--ds-secondaryText, #9ca3af);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.ds-datetime__clear:hover {
+    background-color: var(--ds-fieldBg, #f3f4f6);
+    color: var(--ds-error, #ef4444);
+}
+
+/* Popover */
+.ds-datetime__popover {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 1000;
+    background-color: var(--ds-surface, #ffffff);
+    border: 1px solid var(--ds-border, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    min-width: 320px;
+    overflow: hidden;
+}
+
+/* Header */
+.ds-datetime__header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ds-divider, #e5e7eb);
+    background-color: var(--ds-primaryBg, #f8fafc);
+}
+
+.ds-datetime__tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    color: var(--ds-secondaryText, #6b7280);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.ds-datetime__tab:hover {
+    background-color: var(--ds-divider, #e5e7eb);
+}
+
+.ds-datetime__tab.is-active {
+    background-color: var(--ds-primary, #3b82f6);
+    color: white;
+}
+
+.ds-datetime__actions {
+    margin-left: auto;
+}
+
+/* Navegación de mes */
+.ds-datetime__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+}
+
+.ds-datetime__nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--ds-divider, #e5e7eb);
+    background: none;
+    border-radius: 8px;
+    color: var(--ds-secondaryText, #6b7280);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ds-datetime__nav-btn:hover {
+    background-color: var(--ds-primaryBg, #f3f4f6);
+    color: var(--ds-primary, #3b82f6);
+    border-color: var(--ds-primary, #3b82f6);
+}
+
+.ds-datetime__title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ds-primaryText, #1f2d3d);
+    text-transform: capitalize;
+}
+
+/* Días de semana */
+.ds-datetime__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0 16px 8px;
+    border-bottom: 1px solid var(--ds-divider, #f3f4f6);
+}
+
+.ds-datetime__weekdays span {
+    text-align: center;
+    font-size: var(--ds-font-2xs);
+    font-weight: 600;
+    color: var(--ds-tertiaryText, #9ca3af);
+    padding: 4px;
+}
+
+/* Grid de fechas */
+.ds-datetime__grid {
+    padding: 8px 16px 16px;
+}
+
+.ds-datetime__row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.ds-datetime__cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    font-size: 0.875rem;
+    color: var(--ds-primaryText, #374151);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+}
+
+.ds-datetime__cell:hover:not(.is-empty) {
+    background-color: var(--ds-primaryBg, #e0e7ff);
+}
+
+.ds-datetime__cell.is-selected {
+    background-color: var(--ds-primary, #3b82f6);
+    color: white;
+    font-weight: 600;
+}
+
+.ds-datetime__cell.is-today:not(.is-selected) {
+    font-weight: 600;
+    color: var(--ds-primary, #3b82f6);
+}
+
+.ds-datetime__cell.is-empty {
+    cursor: default;
+}
+
+/* Vista de hora */
+.ds-datetime__time {
+    max-height: 250px;
+    overflow: hidden;
+}
+
+.ds-datetime__time-scroll {
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.ds-datetime__time-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: none;
+    color: var(--ds-primaryText, #374151);
+    font-size: 0.9375rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    text-align: left;
+}
+
+.ds-datetime__time-option:hover {
+    background-color: var(--ds-primaryBg, #f3f4f6);
+}
+
+.ds-datetime__time-option.is-selected {
+    background-color: var(--ds-primary, #3b82f6);
+    color: white;
+}
+
+.ds-datetime__time-option.is-selected svg {
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .ds-datetime__popover {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        min-width: auto;
+    }
+}

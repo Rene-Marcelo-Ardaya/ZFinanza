@@ -1,0 +1,113 @@
+/* DSTable.css */
+
+.ds-table-wrapper {
+    overflow-x: auto;
+    min-height: 200px;
+    width: 100%;
+}
+
+.ds-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--ds-font-md, 14px);
+    background: var(--ds-fieldBg, #fff);
+}
+
+.ds-table th,
+.ds-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--ds-fieldBorder, #e5e7eb);
+}
+
+.ds-table th {
+    background: var(--ds-surfaceBg, #f9fafb);
+    font-weight: 600;
+    font-size: var(--ds-font-xs, 12px);
+    text-transform: uppercase;
+    color: var(--ds-secondaryText, #6b7280);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.ds-table tbody tr {
+    background: inherit;
+}
+
+.ds-table tbody tr:hover {
+    filter: brightness(0.97);
+}
+
+/* Ensure inline styles on tr take precedence */
+.ds-table tbody tr[style] td {
+    background: inherit;
+}
+
+.ds-table-row--clickable {
+    cursor: pointer;
+}
+
+/* Utilities inside table */
+.ds-table .text-right {
+    text-align: right;
+}
+
+.ds-table .text-center {
+    text-align: center;
+}
+
+.ds-table-empty {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--ds-secondaryText, #6b7280);
+    font-style: italic;
+    background: var(--ds-surfaceBg, #f9fafb);
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* Sticky Column for Mobile/Tablet */
+/* Responsive Actions Column Logic */
+
+/* Default (Desktop): Hide mobile actions, Show desktop actions */
+.ds-table-col-actions-mobile {
+    display: none;
+}
+
+.ds-table-col-actions-desktop {
+    display: table-cell;
+}
+
+/* Mobile/Tablet: Show mobile actions (Sticky Left), Hide desktop actions */
+@media (max-width: 1024px) {
+    .ds-table-col-actions-desktop {
+        display: none;
+    }
+
+    .ds-table-col-actions-mobile {
+        display: table-cell;
+        position: sticky;
+        left: 0;
+        z-index: 20;
+        background: var(--ds-fieldBg, #fff);
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+        /* Shadow on right side */
+        border-right: 1px solid var(--ds-fieldBorder, #e5e7eb);
+        /* Ensure proper spacing */
+        min-width: 50px;
+    }
+
+    /* Header specific styles */
+    th.ds-table-col-actions-mobile {
+        z-index: 30;
+        /* Higher priority */
+        background: var(--ds-surfaceBg, #f9fafb);
+    }
+
+    /* Hover effect */
+    .ds-table tbody tr:hover td.ds-table-col-actions-mobile {
+        background: var(--ds-hoverBg, #f3f4f6);
+    }
+}
