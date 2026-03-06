@@ -14,7 +14,10 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::with('roles')->orderBy('order')->get();
-        return response()->json($menus);
+        return response()->json([
+            'success' => true,
+            'data' => $menus
+        ]);
     }
 
     /**
@@ -40,7 +43,11 @@ class MenuController extends Controller
             $menu->roles()->sync($request->roles);
         }
 
-        return response()->json(['message' => 'Menú creado correctamente', 'menu' => $menu->load('roles')], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Menú creado correctamente',
+            'data' => $menu->load('roles')
+        ], 201);
     }
 
     /**
@@ -48,7 +55,10 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        return response()->json(['menu' => $menu->load('roles', 'children')]);
+        return response()->json([
+            'success' => true,
+            'data' => $menu->load('roles', 'children')
+        ]);
     }
 
     /**
@@ -74,7 +84,11 @@ class MenuController extends Controller
             $menu->roles()->sync($request->roles);
         }
 
-        return response()->json(['message' => 'Menú actualizado correctamente', 'menu' => $menu->load('roles')]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Menú actualizado correctamente',
+            'data' => $menu->load('roles')
+        ]);
     }
 
     /**
@@ -85,7 +99,10 @@ class MenuController extends Controller
         $menu->roles()->detach();
         $menu->delete();
 
-        return response()->json(['message' => 'Menú eliminado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Menú eliminado correctamente'
+        ]);
     }
 
     /**
@@ -96,13 +113,19 @@ class MenuController extends Controller
         $user = $request->user();
         
         if (!$user) {
-            return response()->json(['menus' => []]);
+            return response()->json([
+                'success' => true,
+                'data' => ['menus' => []]
+            ]);
         }
 
         $roles = $user->roles;
         
         if ($roles->isEmpty()) {
-            return response()->json(['menus' => []]);
+            return response()->json([
+                'success' => true,
+                'data' => ['menus' => []]
+            ]);
         }
 
         // Obtener todos los menús de los roles del usuario
@@ -122,7 +145,10 @@ class MenuController extends Controller
         // Construir estructura jerárquica
         $menuTree = $this->buildMenuTree($menus);
 
-        return response()->json(['menus' => $menuTree]);
+        return response()->json([
+            'success' => true,
+            'data' => ['menus' => $menuTree]
+        ]);
     }
 
     /**
@@ -157,7 +183,10 @@ class MenuController extends Controller
 
         $menuTree = $this->buildMenuTree($menus);
 
-        return response()->json(['menus' => $menuTree]);
+        return response()->json([
+            'success' => true,
+            'data' => ['menus' => $menuTree]
+        ]);
     }
 
     /**
@@ -166,51 +195,54 @@ class MenuController extends Controller
     public function getAvailableIcons()
     {
         $icons = [
-            'fa-home',
-            'fa-user',
-            'fa-users',
-            'fa-cog',
-            'fa-lock',
-            'fa-key',
-            'fa-shield',
-            'fa-database',
-            'fa-chart-bar',
-            'fa-file',
-            'fa-folder',
-            'fa-truck',
-            'fa-gas-pump',
-            'fa-warehouse',
-            'fa-box',
-            'fa-shopping-cart',
-            'fa-receipt',
-            'fa-dollar-sign',
-            'fa-calculator',
-            'fa-calendar',
-            'fa-clock',
-            'fa-bell',
-            'fa-envelope',
-            'fa-comment',
-            'fa-search',
-            'fa-filter',
-            'fa-download',
-            'fa-upload',
-            'fa-print',
-            'fa-trash',
-            'fa-edit',
-            'fa-plus',
-            'fa-minus',
-            'fa-check',
-            'fa-times',
-            'fa-arrow-left',
-            'fa-arrow-right',
-            'fa-arrow-up',
-            'fa-arrow-down',
-            'fa-refresh',
-            'fa-save',
-            'fa-cancel',
+            'Home',
+            'User',
+            'Users',
+            'Settings',
+            'Lock',
+            'Key',
+            'Shield',
+            'Database',
+            'BarChart',
+            'File',
+            'Folder',
+            'Truck',
+            'Fuel',
+            'Warehouse',
+            'Box',
+            'ShoppingCart',
+            'Receipt',
+            'DollarSign',
+            'Calculator',
+            'Calendar',
+            'Clock',
+            'Bell',
+            'Mail',
+            'MessageCircle',
+            'Search',
+            'Filter',
+            'Download',
+            'Upload',
+            'Printer',
+            'Trash',
+            'Edit',
+            'Plus',
+            'Minus',
+            'Check',
+            'X',
+            'ArrowLeft',
+            'ArrowRight',
+            'ArrowUp',
+            'ArrowDown',
+            'RefreshCw',
+            'Save',
+            'XCircle',
         ];
 
-        return response()->json(['icons' => $icons]);
+        return response()->json([
+            'success' => true,
+            'data' => $icons
+        ]);
     }
 
     /**
@@ -223,7 +255,10 @@ class MenuController extends Controller
             ->orderBy('order')
             ->get();
 
-        return response()->json(['menus' => $menus]);
+        return response()->json([
+            'success' => true,
+            'data' => $menus
+        ]);
     }
 
     /**
@@ -248,7 +283,10 @@ class MenuController extends Controller
             }
         }
 
-        return response()->json(['message' => 'Posiciones actualizadas correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Posiciones actualizadas correctamente'
+        ]);
     }
 
     /**
@@ -262,6 +300,10 @@ class MenuController extends Controller
 
         $menu->update(['order' => $request->order]);
 
-        return response()->json(['message' => 'Menú reordenado correctamente', 'menu' => $menu]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Menú reordenado correctamente',
+            'data' => $menu
+        ]);
     }
 }

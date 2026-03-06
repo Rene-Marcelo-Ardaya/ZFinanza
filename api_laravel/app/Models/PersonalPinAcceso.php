@@ -33,7 +33,7 @@ class PersonalPinAcceso extends Model
     /**
      * Relación con ubicación
      */
-    public function ubicacion()
+    public function ubicacionPin()
     {
         return $this->belongsTo(UbicacionPin::class, 'ubicacion_id');
     }

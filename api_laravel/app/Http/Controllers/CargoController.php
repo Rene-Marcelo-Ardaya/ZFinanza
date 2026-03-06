@@ -9,7 +9,10 @@ class CargoController extends Controller
 {
     public function index()
     {
-        return response()->json(Cargo::orderBy('nombre')->get());
+        return response()->json([
+            'success' => true,
+            'data' => Cargo::withCount('personal')->orderBy('nombre')->get()
+        ]);
     }
 
     /**
@@ -22,6 +25,7 @@ class CargoController extends Controller
             ->get();
 
         return response()->json([
+            'success' => true,
             'data' => $cargos,
         ]);
     }
@@ -36,12 +40,19 @@ class CargoController extends Controller
 
         $cargo = Cargo::create($request->only(['nombre', 'descripcion', 'is_active']));
 
-        return response()->json(['message' => 'Cargo creado correctamente', 'cargo' => $cargo], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Cargo creado correctamente',
+            'data' => $cargo
+        ], 201);
     }
 
     public function show(Cargo $cargo)
     {
-        return response()->json(['cargo' => $cargo->load('personal')]);
+        return response()->json([
+            'success' => true,
+            'data' => $cargo->load('personal')
+        ]);
     }
 
     public function update(Request $request, Cargo $cargo)
@@ -54,16 +65,26 @@ class CargoController extends Controller
 
         $cargo->update($request->only(['nombre', 'descripcion', 'is_active']));
 
-        return response()->json(['message' => 'Cargo actualizado correctamente', 'cargo' => $cargo]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Cargo actualizado correctamente',
+            'data' => $cargo
+        ]);
     }
 
     public function destroy(Cargo $cargo)
     {
         if ($cargo->personal()->count() > 0) {
-            return response()->json(['message' => 'No se puede eliminar el cargo porque tiene personal asociado'], 400);
+            return response()->json([
+                'success' => false,
+                'error' => 'No se puede eliminar el cargo porque tiene personal asociado'
+            ], 400);
         }
         
         $cargo->delete();
-        return response()->json(['message' => 'Cargo eliminado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Cargo eliminado correctamente'
+        ]);
     }
 }

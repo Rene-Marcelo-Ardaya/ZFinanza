@@ -145,8 +145,7 @@ export function useControlAccesos() {
         setUsersModalOpen(true);
         setLoadingRoleUsers(true);
         try {
-            // No tenemos un endpoint especifico getRoleUsers(id), así que:
-            // Opción 1: Traer todos los users y filtrar. (Seguro y fácil para MVP)
+            // Traer todos los users y filtrar por role_id
             const allUsers = await getUsers();
             const filtered = allUsers.filter(u => u.role_id === role.id);
             setRoleUsers(filtered);

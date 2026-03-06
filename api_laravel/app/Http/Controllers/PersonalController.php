@@ -17,15 +17,19 @@ class PersonalController extends Controller
 
     public function index()
     {
-        return response()->json(Personal::with('cargo')->orderBy('nombre')->get());
+        return response()->json([
+            'success' => true,
+            'data' => Personal::with('cargo')->orderBy('nombre')->get()
+        ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'ci' => 'required|string|max:20|unique:personal',
+            'apellido_paterno' => 'required|string|max:255',
+            'apellido_materno' => 'nullable|string|max:255',
+            'ci' => 'nullable|string|max:20|unique:personal',
             'telefono' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'cargo_id' => 'required|exists:cargos,id',
@@ -35,20 +39,28 @@ class PersonalController extends Controller
 
         $personal = Personal::create($request->all());
 
-        return response()->json(['message' => 'Personal creado correctamente', 'personal' => $personal->load('cargo')], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Personal creado correctamente',
+            'data' => $personal->load('cargo')
+        ], 201);
     }
 
     public function show(Personal $personal)
     {
-        return response()->json(['personal' => $personal->load('cargo', 'accesosPin.ubicacionPin')]);
+        return response()->json([
+            'success' => true,
+            'data' => $personal->load('cargo', 'accesosPin.ubicacionPin')
+        ]);
     }
 
     public function update(Request $request, Personal $personal)
     {
         $request->validate([
             'nombre' => 'sometimes|required|string|max:255',
-            'apellido' => 'sometimes|required|string|max:255',
-            'ci' => 'sometimes|required|string|max:20|unique:personal,ci,' . $personal->id,
+            'apellido_paterno' => 'sometimes|required|string|max:255',
+            'apellido_materno' => 'nullable|string|max:255',
+            'ci' => 'nullable|string|max:20|unique:personal,ci,' . $personal->id,
             'telefono' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'cargo_id' => 'sometimes|required|exists:cargos,id',
@@ -58,7 +70,11 @@ class PersonalController extends Controller
 
         $personal->update($request->all());
 
-        return response()->json(['message' => 'Personal actualizado correctamente', 'personal' => $personal->load('cargo')]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Personal actualizado correctamente',
+            'data' => $personal->load('cargo')
+        ]);
     }
 
     public function destroy(Personal $personal)
@@ -66,7 +82,10 @@ class PersonalController extends Controller
         $personal->accesosPin()->delete();
         $personal->delete();
 
-        return response()->json(['message' => 'Personal eliminado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Personal eliminado correctamente'
+        ]);
     }
 
     public function validarPin(Request $request)
@@ -100,6 +119,7 @@ class PersonalController extends Controller
             ->get();
 
         return response()->json([
+            'success' => true,
             'data' => $personal,
         ]);
     }
@@ -163,9 +183,12 @@ class PersonalController extends Controller
         $personal->update(['pin' => $pin]);
 
         return response()->json([
+            'success' => true,
             'message' => 'PIN generado correctamente',
-            'pin' => $pin,
-            'personal' => $personal,
+            'data' => [
+                'pin' => $pin,
+                'personal' => $personal,
+            ]
         ]);
     }
 
@@ -177,8 +200,9 @@ class PersonalController extends Controller
         $personal->update(['pin' => null]);
 
         return response()->json([
+            'success' => true,
             'message' => 'PIN invalidado correctamente',
-            'personal' => $personal,
+            'data' => $personal,
         ]);
     }
 }

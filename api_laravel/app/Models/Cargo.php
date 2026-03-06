@@ -15,6 +15,10 @@ class Cargo extends Model
         'is_active',
     ];
 
+    protected $appends = [
+        'personal_count',
+    ];
+
     protected $casts = [
         'is_active' => 'boolean',
     ];
@@ -33,5 +37,18 @@ class Cargo extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    /**
+     * Obtener conteo de personal asociado
+     */
+    public function getPersonalCountAttribute(): int
+    {
+        // Usar el valor cargado por withCount() si está disponible
+        if (array_key_exists('personal_count', $this->attributes)) {
+            return (int) $this->attributes['personal_count'];
+        }
+        // Fallback a consulta si no está precargado
+        return $this->personal()->count();
     }
 }

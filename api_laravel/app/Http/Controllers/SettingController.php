@@ -38,7 +38,10 @@ class SettingController extends Controller
     }
     public function index()
     {
-        return response()->json(Setting::orderBy('key')->get());
+        return response()->json([
+            'success' => true,
+            'data' => Setting::orderBy('key')->get()
+        ]);
     }
 
     public function store(Request $request)
@@ -53,12 +56,19 @@ class SettingController extends Controller
 
         $setting = Setting::create($request->only(['key', 'value', 'type', 'description', 'is_public']));
 
-        return response()->json(['message' => 'Configuración creada correctamente', 'setting' => $setting], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Configuración creada correctamente',
+            'data' => $setting
+        ], 201);
     }
 
     public function show(Setting $setting)
     {
-        return response()->json(['setting' => $setting]);
+        return response()->json([
+            'success' => true,
+            'data' => $setting
+        ]);
     }
 
     public function update(Request $request, Setting $setting)
@@ -73,18 +83,28 @@ class SettingController extends Controller
 
         $setting->update($request->only(['key', 'value', 'type', 'description', 'is_public']));
 
-        return response()->json(['message' => 'Configuración actualizada correctamente', 'setting' => $setting]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Configuración actualizada correctamente',
+            'data' => $setting
+        ]);
     }
 
     public function destroy(Setting $setting)
     {
         $setting->delete();
-        return response()->json(['message' => 'Configuración eliminada correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Configuración eliminada correctamente'
+        ]);
     }
 
     public function publicas()
     {
-        return response()->json(Setting::getPublicSettings());
+        return response()->json([
+            'success' => true,
+            'data' => Setting::getPublicSettings()
+        ]);
     }
 
     /**
@@ -97,7 +117,8 @@ class SettingController extends Controller
             ->get();
 
         return response()->json([
-            'data' => $settings,
+            'success' => true,
+            'data' => $settings
         ]);
     }
 
@@ -106,7 +127,10 @@ class SettingController extends Controller
         $setting = Setting::where('key', $key)->first();
 
         if (!$setting) {
-            return response()->json(['message' => 'Configuración no encontrada'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'Configuración no encontrada'
+            ], 404);
         }
 
         $value = $setting->value;
@@ -121,9 +145,12 @@ class SettingController extends Controller
         }
 
         return response()->json([
-            'key' => $setting->key,
-            'value' => $value,
-            'type' => $setting->type,
+            'success' => true,
+            'data' => [
+                'key' => $setting->key,
+                'value' => $value,
+                'type' => $setting->type,
+            ]
         ]);
     }
 
@@ -135,7 +162,10 @@ class SettingController extends Controller
         $setting = Setting::where('key', $key)->first();
 
         if (!$setting) {
-            return response()->json(['message' => 'Configuración no encontrada'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'Configuración no encontrada'
+            ], 404);
         }
 
         $request->validate([
@@ -145,8 +175,9 @@ class SettingController extends Controller
         $setting->update(['value' => $request->value]);
 
         return response()->json([
+            'success' => true,
             'message' => 'Configuración actualizada correctamente',
-            'setting' => $setting,
+            'data' => $setting
         ]);
     }
 
@@ -158,7 +189,10 @@ class SettingController extends Controller
         $setting = Setting::where('key', $key)->first();
 
         if (!$setting) {
-            return response()->json(['message' => 'Configuración no encontrada'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'Configuración no encontrada'
+            ], 404);
         }
 
         $request->validate([
@@ -168,8 +202,9 @@ class SettingController extends Controller
         $setting->update(['value' => $request->value]);
 
         return response()->json([
+            'success' => true,
             'message' => 'Configuración actualizada correctamente',
-            'setting' => $setting,
+            'data' => $setting
         ]);
     }
 
@@ -185,7 +220,10 @@ class SettingController extends Controller
         $setting = Setting::where('key', $key)->first();
 
         if (!$setting) {
-            return response()->json(['message' => 'Configuración no encontrada'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'Configuración no encontrada'
+            ], 404);
         }
 
         // Guardar imagen
@@ -201,9 +239,12 @@ class SettingController extends Controller
         $setting->update(['value' => $path]);
 
         return response()->json([
+            'success' => true,
             'message' => 'Imagen subida correctamente',
-            'setting' => $setting,
-            'url' => $url,
+            'data' => [
+                'setting' => $setting,
+                'url' => $url,
+            ]
         ]);
     }
 
@@ -215,7 +256,10 @@ class SettingController extends Controller
         $setting = Setting::where('key', $key)->first();
 
         if (!$setting) {
-            return response()->json(['message' => 'Configuración no encontrada'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'Configuración no encontrada'
+            ], 404);
         }
 
         // Eliminar imagen si existe
@@ -227,8 +271,9 @@ class SettingController extends Controller
         $setting->update(['value' => null]);
 
         return response()->json([
+            'success' => true,
             'message' => 'Imagen eliminada correctamente',
-            'setting' => $setting,
+            'data' => $setting
         ]);
     }
 
@@ -251,8 +296,11 @@ class SettingController extends Controller
         }
 
         return response()->json([
+            'success' => true,
             'message' => 'Configuraciones actualizadas correctamente',
-            'settings' => Setting::getPublicSettings(),
+            'data' => [
+                'settings' => Setting::getPublicSettings()
+            ]
         ]);
     }
 }

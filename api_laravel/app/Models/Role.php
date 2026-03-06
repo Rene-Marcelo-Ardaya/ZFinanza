@@ -14,10 +14,12 @@ class Role extends Model
         'slug',
         'description',
         'session_timeout',
+        'is_active',
     ];
 
     protected $casts = [
         'session_timeout' => 'integer',
+        'is_active' => 'boolean',
     ];
 
     public function permissions()

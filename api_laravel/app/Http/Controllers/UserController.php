@@ -35,6 +35,13 @@ class UserController extends Controller
                     'email' => $user->email,
                     'is_active' => $user->is_active,
                     'role_id' => $user->roles->first()?->id ?? null,
+                    'roles' => $user->roles->map(function ($role) {
+                        return [
+                            'id' => $role->id,
+                            'name' => $role->name,
+                            'slug' => $role->slug,
+                        ];
+                    })->toArray(),
                     'id_personal' => $user->id_personal,
                     'created_at' => $user->created_at,
                     'updated_at' => $user->updated_at,
@@ -67,8 +74,9 @@ class UserController extends Controller
         }
 
         return response()->json([
+            'success' => true,
             'message' => 'Usuario creado correctamente',
-            'user' => $user->load('roles'),
+            'data' => $user->load('roles')
         ], 201);
     }
 
@@ -78,7 +86,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         return response()->json([
-            'user' => $user->load('roles.permissions'),
+            'success' => true,
+            'data' => $user->load('roles.permissions')
         ]);
     }
 
@@ -108,8 +117,9 @@ class UserController extends Controller
         }
 
         return response()->json([
+            'success' => true,
             'message' => 'Usuario actualizado correctamente',
-            'user' => $user->load('roles', 'personal'),
+            'data' => $user->load('roles', 'personal')
         ]);
     }
 
@@ -122,7 +132,10 @@ class UserController extends Controller
         $user->tokens()->delete();
         $user->delete();
 
-        return response()->json(['message' => 'Usuario eliminado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Usuario eliminado correctamente'
+        ]);
     }
 
     /**
@@ -132,7 +145,10 @@ class UserController extends Controller
     {
         $user->update(['is_active' => true]);
 
-        return response()->json(['message' => 'Usuario activado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Usuario activado correctamente'
+        ]);
     }
 
     /**
@@ -142,7 +158,10 @@ class UserController extends Controller
     {
         $user->update(['is_active' => false]);
 
-        return response()->json(['message' => 'Usuario desactivado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Usuario desactivado correctamente'
+        ]);
     }
 
     /**
@@ -157,8 +176,9 @@ class UserController extends Controller
         $user->roles()->syncWithoutDetaching([$request->role_id]);
 
         return response()->json([
+            'success' => true,
             'message' => 'Rol asignado correctamente',
-            'user' => $user->load('roles'),
+            'data' => $user->load('roles')
         ]);
     }
 
@@ -174,8 +194,9 @@ class UserController extends Controller
         $user->roles()->detach($request->role_id);
 
         return response()->json([
+            'success' => true,
             'message' => 'Rol removido correctamente',
-            'user' => $user->load('roles'),
+            'data' => $user->load('roles')
         ]);
     }
 
@@ -187,7 +208,8 @@ class UserController extends Controller
         $roles = \App\Models\Role::all();
 
         return response()->json([
-            'data' => $roles,
+            'success' => true,
+            'data' => $roles
         ]);
     }
 
@@ -204,11 +226,17 @@ class UserController extends Controller
         $user = $request->user();
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return response()->json(['message' => 'La contraseña actual es incorrecta'], 422);
+            return response()->json([
+                'success' => false,
+                'error' => 'La contraseña actual es incorrecta'
+            ], 422);
         }
 
         $user->update(['password' => Hash::make($request->password)]);
 
-        return response()->json(['message' => 'Contraseña actualizada correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Contraseña actualizada correctamente'
+        ]);
     }
 }

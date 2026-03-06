@@ -9,7 +9,10 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        return response()->json(Permission::orderBy('name')->get());
+        return response()->json([
+            'success' => true,
+            'data' => Permission::orderBy('name')->get()
+        ]);
     }
 
     public function store(Request $request)
@@ -23,12 +26,19 @@ class PermissionController extends Controller
 
         $permission = Permission::create($request->only(['name', 'slug', 'module', 'description']));
 
-        return response()->json(['message' => 'Permiso creado correctamente', 'permission' => $permission], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Permiso creado correctamente',
+            'data' => $permission
+        ], 201);
     }
 
     public function show(Permission $permission)
     {
-        return response()->json(['permission' => $permission->load('roles')]);
+        return response()->json([
+            'success' => true,
+            'data' => $permission->load('roles')
+        ]);
     }
 
     public function update(Request $request, Permission $permission)
@@ -42,7 +52,11 @@ class PermissionController extends Controller
 
         $permission->update($request->only(['name', 'slug', 'module', 'description']));
 
-        return response()->json(['message' => 'Permiso actualizado correctamente', 'permission' => $permission]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Permiso actualizado correctamente',
+            'data' => $permission
+        ]);
     }
 
     public function destroy(Permission $permission)
@@ -50,6 +64,9 @@ class PermissionController extends Controller
         $permission->roles()->detach();
         $permission->delete();
 
-        return response()->json(['message' => 'Permiso eliminado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Permiso eliminado correctamente'
+        ]);
     }
 }

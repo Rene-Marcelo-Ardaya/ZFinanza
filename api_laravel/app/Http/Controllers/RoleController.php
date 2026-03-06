@@ -16,7 +16,19 @@ class RoleController extends Controller
                   ->orWhere('slug', 'like', "%{$request->search}%");
         }
 
-        return response()->json($query->orderBy('name')->get());
+        $roles = $query->orderBy('name')->get();
+        
+        // Agregar contadores para el frontend
+        $roles->each(function ($role) {
+            $role->menus_count = $role->menus()->count();
+            $role->users_count = $role->users()->count();
+            $role->menu_ids = $role->menus()->pluck('menus.id')->toArray();
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $roles
+        ]);
     }
 
     public function store(Request $request)
@@ -25,23 +37,45 @@ class RoleController extends Controller
             'name' => 'required|string|max:255|unique:roles',
             'slug' => 'required|string|max:255|unique:roles',
             'description' => 'nullable|string',
-            'session_timeout' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+            'session_timeout_minutes' => 'nullable|integer',
+            'menu_ids' => 'array',
+            'menu_ids.*' => 'exists:menus,id',
             'permissions' => 'array',
             'permissions.*' => 'exists:permissions,id',
         ]);
 
-        $role = Role::create($request->only(['name', 'slug', 'description', 'session_timeout']));
+        // Mapear session_timeout_minutes a session_timeout
+        $data = $request->only(['name', 'slug', 'description', 'is_active']);
+        if ($request->has('session_timeout_minutes')) {
+            $data['session_timeout'] = $request->session_timeout_minutes;
+        }
 
+        $role = Role::create($data);
+
+        // Sincronizar menús
+        if ($request->has('menu_ids')) {
+            $role->menus()->sync($request->menu_ids);
+        }
+
+        // Sincronizar permisos (si se envían)
         if ($request->has('permissions')) {
             $role->permissions()->sync($request->permissions);
         }
 
-        return response()->json(['message' => 'Rol creado correctamente', 'role' => $role->load('permissions')], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Rol creado correctamente',
+            'data' => $this->formatRoleData($role)
+        ], 201);
     }
 
     public function show(Role $role)
     {
-        return response()->json(['role' => $role->load('permissions', 'menus')]);
+        return response()->json([
+            'success' => true,
+            'data' => $this->formatRoleData($role)
+        ]);
     }
 
     public function update(Request $request, Role $role)
@@ -50,18 +84,37 @@ class RoleController extends Controller
             'name' => 'sometimes|required|string|max:255|unique:roles,name,' . $role->id,
             'slug' => 'sometimes|required|string|max:255|unique:roles,slug,' . $role->id,
             'description' => 'nullable|string',
-            'session_timeout' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+            'session_timeout_minutes' => 'nullable|integer',
+            'menu_ids' => 'sometimes|array',
+            'menu_ids.*' => 'exists:menus,id',
             'permissions' => 'sometimes|array',
             'permissions.*' => 'exists:permissions,id',
         ]);
 
-        $role->update($request->only(['name', 'slug', 'description', 'session_timeout']));
+        // Mapear session_timeout_minutes a session_timeout
+        $data = $request->only(['name', 'slug', 'description', 'is_active']);
+        if ($request->has('session_timeout_minutes')) {
+            $data['session_timeout'] = $request->session_timeout_minutes;
+        }
 
+        $role->update($data);
+
+        // Sincronizar menús
+        if ($request->has('menu_ids')) {
+            $role->menus()->sync($request->menu_ids);
+        }
+
+        // Sincronizar permisos (si se envían)
         if ($request->has('permissions')) {
             $role->permissions()->sync($request->permissions);
         }
 
-        return response()->json(['message' => 'Rol actualizado correctamente', 'role' => $role->load('permissions')]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Rol actualizado correctamente',
+            'data' => $this->formatRoleData($role)
+        ]);
     }
 
     public function destroy(Role $role)
@@ -71,7 +124,10 @@ class RoleController extends Controller
         $role->users()->detach();
         $role->delete();
 
-        return response()->json(['message' => 'Rol eliminado correctamente']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Rol eliminado correctamente'
+        ]);
     }
 
     /**
@@ -105,8 +161,9 @@ class RoleController extends Controller
         $role->menus()->sync($request->menus);
 
         return response()->json([
+            'success' => true,
             'message' => 'Menús sincronizados correctamente',
-            'role' => $role->load('menus'),
+            'data' => $role->load('menus'),
         ]);
     }
 
@@ -120,7 +177,26 @@ class RoleController extends Controller
             ->get();
 
         return response()->json([
+            'success' => true,
             'data' => $menus,
         ]);
+    }
+
+    /**
+     * Formatear datos del rol para el frontend
+     */
+    private function formatRoleData(Role $role)
+    {
+        $role->load('permissions', 'menus');
+        
+        // Mapear session_timeout a session_timeout_minutes para el frontend
+        $role->session_timeout_minutes = $role->session_timeout;
+        
+        // Agregar contadores
+        $role->menus_count = $role->menus()->count();
+        $role->users_count = $role->users()->count();
+        $role->menu_ids = $role->menus()->pluck('menus.id')->toArray();
+        
+        return $role;
     }
 }

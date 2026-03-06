@@ -14,7 +14,6 @@ class Personal extends Model
 
     protected $fillable = [
         'nombre',
-        'apellido',
         'apellido_paterno',
         'apellido_materno',
         'ci',
@@ -25,6 +24,20 @@ class Personal extends Model
         'is_active',
         'nivel_seguridad_id',
         'estado',
+        'fecha_nacimiento',
+        'genero',
+        'direccion',
+        'fecha_ingreso',
+        'fecha_salida',
+        'salario',
+        'tipo_contrato',
+        'observaciones',
+        'user_id',
+    ];
+
+    protected $appends = [
+        'nombre_completo',
+        'cargo_nombre',
     ];
 
     protected $hidden = [
@@ -48,7 +61,7 @@ class Personal extends Model
     /**
      * Relación con accesos PIN
      */
-    public function pinAccesos()
+    public function accesosPin()
     {
         return $this->hasMany(PersonalPinAcceso::class);
     }
@@ -107,10 +120,15 @@ class Personal extends Model
         if ($this->apellido_materno) {
             $apellido .= $this->apellido_materno . ' ';
         }
-        if ($this->apellido) {
-            $apellido .= $this->apellido;
-        }
         
         return trim("{$this->nombre} {$apellido}");
+    }
+
+    /**
+     * Obtener nombre del cargo
+     */
+    public function getCargoNombreAttribute(): ?string
+    {
+        return $this->cargo?->nombre;
     }
 }

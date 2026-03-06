@@ -43,7 +43,7 @@ export function MenuFormModal({
     setForm
 }) {
     // Filtrar para no permitir autoseleccionarse como padre si se edita
-    const filteredParents = parentMenus; // Podría filtrarse más si se desea evitar ciclos
+    const filteredParents = Array.isArray(parentMenus) ? parentMenus : []; // Asegurar que sea un array
 
     // Validacion para boton verde
     const isFormValid = form.name && form.name.trim() !== '';
