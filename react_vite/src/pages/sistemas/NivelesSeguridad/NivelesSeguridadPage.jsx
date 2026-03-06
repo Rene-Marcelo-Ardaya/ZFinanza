@@ -5,7 +5,7 @@ import {
     DSPageHeader,
     DSAlert,
     DSButton
-} from '../../ds-components';
+} from '../../../ds-components';
 
 import './NivelesSeguridadPage.css';
 
@@ -13,9 +13,9 @@ import './NivelesSeguridadPage.css';
 import { useNivelesSeguridad } from './hooks/useNivelesSeguridad';
 
 // Components
-import { NivelesTable } from './components/NivelesSeguridad/NivelesTable';
-import { NivelFormModal } from './components/NivelesSeguridad/NivelFormModal';
-import { MiembrosModal } from './components/NivelesSeguridad/MiembrosModal';
+import { NivelesTable } from './components/NivelesTable';
+import { NivelFormModal } from './components/NivelFormModal';
+import { MiembrosModal } from './components/MiembrosModal';
 
 export function NivelesSeguridadPage() {
     const logic = useNivelesSeguridad();

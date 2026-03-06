@@ -4,7 +4,7 @@ import {
     createNivel,
     updateNivel,
     deleteNivel
-} from '../../../services/securityLevelService';
+} from '../../../../services/securityLevelService';
 
 export function useNivelesSeguridad() {
     // 1. DATA STATE

@@ -5,7 +5,7 @@ import {
     DSPageHeader,
     DSAlert,
     SecuredButton
-} from '../../ds-components';
+} from '../../../ds-components';
 
 import './ControlAccesosPage.css';
 
@@ -13,10 +13,10 @@ import './ControlAccesosPage.css';
 import { useControlAccesos } from './hooks/useControlAccesos';
 
 // Components
-import { RolesTable } from './components/ControlAccesos/RolesTable';
-import { RoleFormModal } from './components/ControlAccesos/RoleFormModal';
-import { RoleMenusModal } from './components/ControlAccesos/RoleMenusModal';
-import { RoleUsersModal } from './components/ControlAccesos/RoleUsersModal';
+import { RolesTable } from './components/RolesTable';
+import { RoleFormModal } from './components/RoleFormModal';
+import { RoleMenusModal } from './components/RoleMenusModal';
+import { RoleUsersModal } from './components/RoleUsersModal';
 
 export function ControlAccesosPage() {
     const logic = useControlAccesos();

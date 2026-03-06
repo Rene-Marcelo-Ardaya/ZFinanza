@@ -8,7 +8,7 @@ import {
     updateMenu,
     deleteMenu,
     updateMenuPositions
-} from '../../../services/menuAdminService';
+} from '../../../../services/menuAdminService';
 import { arrayMove } from '@dnd-kit/sortable';
 
 export function useMenus() {

@@ -3,7 +3,7 @@ import {
     getAllSettings,
     updateSetting,
     bulkUpdateSettings
-} from '../../../services/settingService';
+} from '../../../../services/settingService';
 
 export function useConfiguracion() {
     const [settings, setSettings] = useState({});

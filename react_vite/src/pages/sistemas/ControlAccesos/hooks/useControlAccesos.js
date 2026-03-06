@@ -6,8 +6,8 @@ import {
     createRole,
     updateRole,
     deleteRole
-} from '../../../services/roleService';
-import { getUsers } from '../../../services/userService';
+} from '../../../../services/roleService';
+import { getUsers } from '../../../../services/userService';
 
 export function useControlAccesos() {
     // 1. DATA STATE

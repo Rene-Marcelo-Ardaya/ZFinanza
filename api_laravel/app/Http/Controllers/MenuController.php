@@ -14,6 +14,12 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::with('roles')->orderBy('order')->get();
+        
+        // Agregar contador de roles para el frontend
+        $menus->each(function ($menu) {
+            $menu->roles_count = $menu->roles()->count();
+        });
+        
         return response()->json([
             'success' => true,
             'data' => $menus

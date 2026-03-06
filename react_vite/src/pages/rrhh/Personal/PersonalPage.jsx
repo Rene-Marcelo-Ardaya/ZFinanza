@@ -5,7 +5,7 @@ import {
     DSPageHeader,
     DSAlert,
     SecuredButton
-} from '../../ds-components';
+} from '../../../ds-components';
 
 import './PersonalPage.css';
 
@@ -13,8 +13,8 @@ import './PersonalPage.css';
 import { usePersonal } from './hooks/usePersonal';
 
 // Components
-import { PersonalTable } from './components/Personal/PersonalTable';
-import { PersonalFormModal } from './components/Personal/PersonalFormModal';
+import { PersonalTable } from './components/PersonalTable';
+import { PersonalFormModal } from './components/PersonalFormModal';
 
 export function PersonalPage() {
     const logic = usePersonal();

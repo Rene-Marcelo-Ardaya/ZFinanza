@@ -29,13 +29,16 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'data' => $users->map(function ($user) {
+                $firstRole = $user->roles->first();
                 return [
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
                     'is_active' => $user->is_active,
-                    'role_id' => $user->roles->first()?->id ?? null,
-                    'roles' => $user->roles->map(function ($role) {
+                    'role_id' => $firstRole?->id ?? null,
+                    'roles' => $firstRole?->name ?? '-', // Para compatibilidad con frontend
+                    'role_name' => $firstRole?->name ?? '-', // Nombre del rol para mostrar
+                    'role_data' => $user->roles->map(function ($role) {
                         return [
                             'id' => $role->id,
                             'name' => $role->name,
@@ -205,7 +208,16 @@ class UserController extends Controller
      */
     public function getRoles()
     {
-        $roles = \App\Models\Role::all();
+        $roles = \App\Models\Role::where('is_active', true)
+            ->orderBy('name')
+            ->get()
+            ->map(function ($role) {
+                return [
+                    'value' => $role->id,
+                    'label' => $role->name,
+                    'slug' => $role->slug,
+                ];
+            });
 
         return response()->json([
             'success' => true,

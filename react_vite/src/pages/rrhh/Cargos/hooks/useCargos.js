@@ -5,8 +5,8 @@ import {
     createCargo,
     updateCargo,
     deleteCargo
-} from '../../../services/cargoService';
-import { getPersonal } from '../../../services/personalService';
+} from '../../../../services/cargoService';
+import { getPersonal } from '../../../../services/personalService';
 
 export function useCargos() {
     // 1. DATA STATE

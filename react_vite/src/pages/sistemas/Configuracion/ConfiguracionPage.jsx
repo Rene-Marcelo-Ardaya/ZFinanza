@@ -13,7 +13,7 @@ import {
     DSLoading,
     DSFieldsGrid,
     DSImagesGrid,
-} from '../../ds-components';
+} from '../../../ds-components';
 
 import './ConfiguracionPage.css';
 
@@ -21,9 +21,9 @@ import './ConfiguracionPage.css';
 import { useConfiguracion } from './hooks/useConfiguracion';
 
 // Componentes
-import { ConfigTextField } from './components/Configuracion/ConfigTextField';
-import { ConfigColorField } from './components/Configuracion/ConfigColorField';
-import { ConfigImageField } from './components/Configuracion/ConfigImageField';
+import { ConfigTextField } from './components/ConfigTextField';
+import { ConfigColorField } from './components/ConfigColorField';
+import { ConfigImageField } from './components/ConfigImageField';
 
 export function ConfiguracionPage() {
     const { theme } = useTheme();

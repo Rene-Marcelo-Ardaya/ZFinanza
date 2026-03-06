@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getUsers, getRolesList, createUser, updateUser, deleteUser } from '../../../services/userService';
-import { getPersonalCombo } from '../../../services/personalService';
+import { getUsers, getRolesList, createUser, updateUser, deleteUser } from '../../../../services/userService';
+import { getPersonalCombo } from '../../../../services/personalService';
 
 export function useUsuarios() {
     // 1. DATA STATE
@@ -147,7 +147,7 @@ export function useUsuarios() {
             const payload = {
                 name: form.name,
                 email: form.email,
-                role_id: parseInt(form.role_id),
+                roles: form.role_id ? [parseInt(form.role_id)] : [],
                 id_personal: form.id_personal ? parseInt(form.id_personal) : null,
                 is_active: form.is_active
             };
@@ -186,7 +186,7 @@ export function useUsuarios() {
             const payload = {
                 name: user.name,
                 email: user.email,
-                role_id: user.role_id,
+                roles: user.role_id ? [user.role_id] : [],
                 id_personal: user.id_personal,
                 is_active: false
             };

@@ -5,7 +5,7 @@ import {
     DSPageHeader,
     DSAlert,
     SecuredButton
-} from '../../ds-components';
+} from '../../../ds-components';
 
 import './UsuariosPage.css';
 
@@ -13,8 +13,8 @@ import './UsuariosPage.css';
 import { useUsuarios } from './hooks/useUsuarios';
 
 // Components
-import { UsuariosTable } from './components/Usuarios/UsuariosTable';
-import { UserFormModal } from './components/Usuarios/UserFormModal';
+import { UsuariosTable } from './components/UsuariosTable';
+import { UserFormModal } from './components/UserFormModal';
 
 export function UsuariosPage() {
     const logic = useUsuarios();

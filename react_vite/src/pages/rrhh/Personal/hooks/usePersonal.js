@@ -5,8 +5,8 @@ import {
     createEmpleado,
     updateEmpleado,
     deleteEmpleado
-} from '../../../services/personalService';
-import { getCargosActivos } from '../../../services/cargoService';
+} from '../../../../services/personalService';
+import { getCargosActivos } from '../../../../services/cargoService';
 
 export function usePersonal() {
     // 1. DATA STATE

@@ -6,7 +6,7 @@ import {
     DSAlert,
     DSButton,
     SecuredButton
-} from '../../ds-components';
+} from '../../../ds-components';
 
 import './MenusPage.css';
 
@@ -14,9 +14,9 @@ import './MenusPage.css';
 import { useMenus } from './hooks/useMenus';
 
 // Components
-import { MenuTreeTable } from './components/Menus/MenuTreeTable';
-import { SortableMenuTree } from './components/Menus/SortableMenuTree';
-import { MenuFormModal } from './components/Menus/MenuFormModal';
+import { MenuTreeTable } from './components/MenuTreeTable';
+import { SortableMenuTree } from './components/SortableMenuTree';
+import { MenuFormModal } from './components/MenuFormModal';
 
 export function MenusPage() {
     const logic = useMenus();

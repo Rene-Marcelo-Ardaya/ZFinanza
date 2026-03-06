@@ -46,27 +46,27 @@ export const PAGE_REGISTRY = {
 
   // Sistemas (Administración y Seguridad)
   [USERS_ROUTE]: page(
-    lazyNamed(() => import('../pages/sistemas/UsuariosPage'), 'UsuariosPage'),
+    lazyNamed(() => import('../pages/sistemas/Usuarios/UsuariosPage'), 'UsuariosPage'),
     buildDefaultProps,
   ),
   [ROLES_ROUTE]: page(
-    lazyNamed(() => import('../pages/sistemas/ControlAccesosPage'), 'ControlAccesosPage'),
+    lazyNamed(() => import('../pages/sistemas/ControlAccesos/ControlAccesosPage'), 'ControlAccesosPage'),
     buildDefaultProps,
   ),
   [PERMISSIONS_ROUTE]: page(
-    lazyNamed(() => import('../pages/sistemas/ControlAccesosPage'), 'ControlAccesosPage'),
+    lazyNamed(() => import('../pages/sistemas/ControlAccesos/ControlAccesosPage'), 'ControlAccesosPage'),
     buildDefaultProps,
   ),
   [MENUS_ROUTE]: page(
-    lazyNamed(() => import('../pages/sistemas/MenusPage'), 'MenusPage'),
+    lazyNamed(() => import('../pages/sistemas/Menus/MenusPage'), 'MenusPage'),
     buildDefaultProps,
   ),
   [SETTINGS_ROUTE]: page(
-    lazyNamed(() => import('../pages/sistemas/ConfiguracionPage'), 'ConfiguracionPage'),
+    lazyNamed(() => import('../pages/sistemas/Configuracion/ConfiguracionPage'), 'ConfiguracionPage'),
     buildDefaultProps,
   ),
   [SECURITY_LEVELS_ROUTE]: page(
-    lazyNamed(() => import('../pages/sistemas/NivelesSeguridadPage'), 'NivelesSeguridadPage'),
+    lazyNamed(() => import('../pages/sistemas/NivelesSeguridad/NivelesSeguridadPage'), 'NivelesSeguridadPage'),
     buildDefaultProps,
   ),
   [PIN_ACCESS_ROUTE]: page(
@@ -74,13 +74,12 @@ export const PAGE_REGISTRY = {
     buildDefaultProps,
   ),
 
-  // RRHH
   [PERSONAL_ROUTE]: page(
-    lazyNamed(() => import('../pages/rrhh/PersonalPage'), 'PersonalPage'),
+    lazyNamed(() => import('../pages/rrhh/Personal/PersonalPage'), 'PersonalPage'),
     buildDefaultProps,
   ),
   [CARGOS_ROUTE]: page(
-    lazyNamed(() => import('../pages/rrhh/CargosPage'), 'CargosPage'),
+    lazyNamed(() => import('../pages/rrhh/Cargos/CargosPage'), 'CargosPage'),
     buildDefaultProps,
   ),
 };

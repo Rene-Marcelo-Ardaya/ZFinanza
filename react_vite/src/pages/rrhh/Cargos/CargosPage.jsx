@@ -5,7 +5,7 @@ import {
     DSPageHeader,
     DSAlert,
     SecuredButton
-} from '../../ds-components';
+} from '../../../ds-components';
 
 import './CargosPage.css';
 
@@ -13,9 +13,9 @@ import './CargosPage.css';
 import { useCargos } from './hooks/useCargos';
 
 // Components
-import { CargosTable } from './components/Cargos/CargosTable';
-import { CargoFormModal } from './components/Cargos/CargoFormModal';
-import { PersonalPorCargoModal } from './components/Cargos/PersonalPorCargoModal';
+import { CargosTable } from './components/CargosTable';
+import { CargoFormModal } from './components/CargoFormModal';
+import { PersonalPorCargoModal } from './components/PersonalPorCargoModal';
 
 export function CargosPage() {
     const logic = useCargos();
