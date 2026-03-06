@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\RRHH;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Sistemas\NivelSeguridad;
 
 class Personal extends Model
 {

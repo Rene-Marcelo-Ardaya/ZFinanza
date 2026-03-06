@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RRHH;
 
-use App\Models\Personal;
+use App\Models\RRHH\Personal;
 use App\Services\PinValidationService;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PersonalController extends Controller

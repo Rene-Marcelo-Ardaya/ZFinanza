@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sistemas;
 
-use App\Models\ComponenteSeguridad;
+use App\Models\Sistemas\ComponenteSeguridad;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 

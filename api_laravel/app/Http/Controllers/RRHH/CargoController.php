@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RRHH;
 
-use App\Models\Cargo;
+use App\Models\RRHH\Cargo;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CargoController extends Controller

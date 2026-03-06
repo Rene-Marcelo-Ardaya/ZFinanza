@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\RRHH;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Sistemas\UbicacionPin;
 
 class PersonalPinAcceso extends Model
 {

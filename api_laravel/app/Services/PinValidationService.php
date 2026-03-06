@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Personal;
-use App\Models\PersonalPinAcceso;
+use App\Models\RRHH\Personal;
+use App\Models\RRHH\PersonalPinAcceso;
 use Illuminate\Support\Facades\Hash;
 
 /**

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sistemas;
 
-use App\Models\NivelSeguridad;
-use App\Models\Personal;
+use App\Models\Sistemas\NivelSeguridad;
+use App\Models\RRHH\Personal;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
