@@ -106,12 +106,27 @@ export function MenusPage() {
 
             {/* INFO BOX */}
             <DSAlert variant="info" className="menus-alert-margin">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <AlertTriangle size={16} />
-                    <span>
-                        <strong>Solo Superusuarios:</strong> Esta sección permite administrar los menús del sistema.
-                        Los cambios afectan a la navegación de todos los roles.
-                    </span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <AlertTriangle size={16} />
+                        <span>
+                            <strong>Solo Superusuarios:</strong> Esta sección permite administrar los menús del sistema.
+                            Los cambios afectan a la navegación de todos los roles.
+                        </span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginLeft: '24px' }}>
+                        <span style={{ fontSize: '12px', marginTop: '2px' }}>•</span>
+                        <span style={{ fontSize: '13px' }}>
+                            <strong>Tipo "Sidebar":</strong> Menús principales que aparecen en la barra lateral de navegación.
+                        </span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginLeft: '24px' }}>
+                        <span style={{ fontSize: '12px', marginTop: '2px' }}>•</span>
+                        <span style={{ fontSize: '13px' }}>
+                            <strong>Tipo "Tab":</strong> Pestañas dentro de una página (hijas de un menú Sidebar).
+                            Permiten control granular de permisos por sección.
+                        </span>
+                    </div>
                 </div>
             </DSAlert>
 

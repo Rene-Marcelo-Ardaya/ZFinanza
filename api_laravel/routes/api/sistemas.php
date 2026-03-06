@@ -80,6 +80,7 @@ Route::prefix('menus')->group(function () {
     Route::put('/{id}', [MenuController::class, 'update'])->where('id', '[0-9]+');
     Route::delete('/{id}', [MenuController::class, 'destroy'])->where('id', '[0-9]+');
     Route::put('/{id}/reorder', [MenuController::class, 'reorder'])->where('id', '[0-9]+');
+    Route::get('/{parentMenuId}/tabs', [MenuController::class, 'getTabsByPage'])->where('parentMenuId', '[0-9]+');
 });
 
 // -------------------------------------------------------------------------

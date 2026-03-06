@@ -40,7 +40,8 @@ export function useMenus() {
         parent_id: '',
         order: 0,
         module: '',
-        is_active: true
+        is_active: true,
+        menu_type: 'sidebar'
     };
 
     const [form, setForm] = useState(emptyForm);

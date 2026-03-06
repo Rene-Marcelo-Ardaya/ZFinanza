@@ -17,12 +17,14 @@ class Menu extends Model
         'order',
         'module',
         'is_active',
+        'menu_type',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
         'order' => 'integer',
         'parent_id' => 'integer',
+        'menu_type' => 'string',
     ];
 
     /**

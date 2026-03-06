@@ -1,6 +1,7 @@
 import React from 'react'
 import { DSPanel } from './DSPanel'
 import { DSTabs } from './DSTabs'
+import { DSTabsByRole } from './DSTabsByRole'
 import { DSAccordion } from './DSAccordion'
 import { DSBorderLayout } from './DSBorderLayout'
 import { DSPage, DSPageHeader, DSPageContent, DSPageGrid, DSBreadcrumbs, DSToolbar, DSToolbarGroup, DSToolbarSeparator, DSToolbarSpacer } from './DSPage'
@@ -10,6 +11,7 @@ import { DSFooter } from './DSFooter'
 export {
   DSPanel,
   DSTabs,
+  DSTabsByRole,
   DSAccordion,
   DSBorderLayout,
   DSFooter,

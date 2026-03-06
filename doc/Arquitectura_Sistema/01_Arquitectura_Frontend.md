@@ -71,8 +71,57 @@ Existen elementos que pertenecen a todo el sistema y **SÍ** deben vivir en carp
 
 ---
 
-## 5. Resumen de Ventajas
+## 5. Control de Acceso con SecuredButton
 
-- **Alta cohesión:** Toda la información sobre una funcionalidad está en el mismo sitio. Eliminas un módulo simplemente borrando su carpeta entera.
-- **Bajo acoplamiento:** Si el módulo "Usuarios" cambia, sus imports no se rompen ni afectan al módulo "Cargos".
-- **Facilidad de Búsqueda:** Cuando debas arreglar un bug en "Menús", sabrás exactamente a qué subcarpeta dirigirte (`src/pages/sistemas/Menus`) en lugar de escrutinar cientos de archivos en una carpeta global `components/`.
+El componente `<SecuredButton>` se utiliza para controlar el acceso a acciones específicas basándose en los grupos/permisos de seguridad del usuario. **Es importante destacar que NO es obligatorio usar este componente en todos los botones del sistema**.
+
+### Cuándo Usar SecuredButton
+
+Debes usar `<SecuredButton>` en situaciones donde:
+- La acción requiere permisos específicos (ej: crear, editar, eliminar registros)
+- El botón debe estar visible solo para usuarios con ciertos roles o niveles de seguridad
+- Necesitas restringir acceso a funcionalidades críticas del sistema
+
+### Cuándo NO Usar SecuredButton
+
+**NO** es necesario usar `<SecuredButton>` en:
+- Botones de navegación general (menús laterales, breadcrumbs)
+- Acciones que no requieren permisos especiales (ej: búsqueda, filtrado, exportación de datos públicos)
+- Botones que siempre deben estar disponibles para todos los usuarios autenticados
+- Elementos de UI decorativos o informativos
+
+### Ejemplos de Uso
+
+```jsx
+// ✅ CORRECTO: Usar SecuredButton para acciones restringidas
+<SecuredButton securityId="usuarios.crear">
+  Nuevo Usuario
+</SecuredButton>
+
+<SecuredButton securityId={["usuarios.editar", "admin.accesos"]}>
+  Editar Usuario
+</SecuredButton>
+
+// ✅ CORRECTO: Usar DSButton normal para acciones públicas
+<DSButton onClick={handleSearch}>
+  Buscar
+</DSButton>
+
+<DSButton variant="secondary" onClick={handleExport}>
+  Exportar Datos
+</DSButton>
+```
+
+### Soporte para Múltiples Grupos
+
+El `<SecuredButton>` soporta asignar múltiples grupos de seguridad. El botón se mostrará si el usuario tiene acceso a **ALGUNO** de los grupos especificados (lógica OR):
+
+```jsx
+// El botón se muestra si el usuario tiene "usuarios.crear" O "admin.accesos"
+<SecuredButton securityId={["usuarios.crear", "admin.accesos"]}>
+  Crear Usuario
+</SecuredButton>
+```
+
+---
+

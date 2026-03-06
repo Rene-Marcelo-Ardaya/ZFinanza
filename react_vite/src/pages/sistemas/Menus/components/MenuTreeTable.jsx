@@ -65,6 +65,11 @@ function MenuTreeItem({ menu, level = 0, onEdit, onDelete, expandedIds, toggleEx
                     ) : '—'}
                 </td>
                 <td className="ds-table__center">
+                    <DSBadge variant={menu.menu_type === 'tab' ? 'info' : 'success'}>
+                        {menu.menu_type === 'tab' ? 'Tab' : 'Sidebar'}
+                    </DSBadge>
+                </td>
+                <td className="ds-table__center">
                     <DSCount variant="purple">{menu.roles_count || 0}</DSCount>
                 </td>
                 <td>
@@ -137,20 +142,21 @@ export function MenuTreeTable({
                     <table className="ds-table ds-table--striped ds-table--hover">
                         <thead>
                             <tr>
-                                <th style={{ width: '30%' }}>Nombre</th>
-                                <th style={{ width: '20%' }}>URL / Ruta</th>
-                                <th style={{ width: '15%' }}>Icono</th>
-                                <th style={{ width: '8%' }}>Orden</th>
+                                <th style={{ width: '25%' }}>Nombre</th>
+                                <th style={{ width: '18%' }}>URL / Ruta</th>
+                                <th style={{ width: '12%' }}>Icono</th>
+                                <th style={{ width: '6%' }}>Orden</th>
                                 <th style={{ width: '10%' }}>Módulo</th>
-                                <th style={{ width: '8%' }}>Roles</th>
-                                <th style={{ width: '8%' }}>Estado</th>
-                                <th style={{ width: '10%' }}>Acciones</th>
+                                <th style={{ width: '8%' }}>Tipo</th>
+                                <th style={{ width: '6%' }}>Roles</th>
+                                <th style={{ width: '7%' }}>Estado</th>
+                                <th style={{ width: '8%' }}>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {menus.length === 0 ? (
                                 <tr>
-                                    <td colSpan="8" className="ds-table__empty">
+                                    <td colSpan="9" className="ds-table__empty">
                                         No hay menús registrados
                                     </td>
                                 </tr>

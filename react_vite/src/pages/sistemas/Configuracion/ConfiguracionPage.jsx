@@ -1,6 +1,7 @@
 import React from 'react';
 import { Settings, Palette, Building2, Monitor } from 'lucide-react';
-import { useTheme } from '../../theme';
+import { useTheme } from '../../../theme';
+import { LoginPage } from '../../LoginPage';
 
 // Importar componentes DS reutilizables
 import {
@@ -205,18 +206,15 @@ export function ConfiguracionPage() {
                     </DSSubsection>
                 </DSSection>
 
-                {/* SECCIÓN: Vista Previa Real (Iframe) */}
+                {/* SECCIÓN: Vista Previa del Login */}
                 <DSSection
                     title="Vista Previa del Login (Sitio Real)"
                     icon={<Monitor size={18} />}
                 >
-                    <div className="config-iframe-wrapper">
-                        <iframe
-                            key={`${logic.iframeKey}-${theme}`}
-                            src={`/?mode=preview&theme=${theme}`}
-                            title="Vista previa del login"
-                            className="config-iframe-preview"
-                        />
+                    <div className="config-preview-wrapper">
+                        <div className="config-preview-scale">
+                            <LoginPage onLoginSuccess={() => { }} />
+                        </div>
                         {/* Overlay para bloquear interacción (solo ver) */}
                         <div className="config-iframe-overlay"></div>
                     </div>

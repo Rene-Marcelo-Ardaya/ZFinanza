@@ -12,6 +12,10 @@ Documentación técnica de referencia para el sistema. Consultar estos archivos 
 
 - [03_Modelo_Base_Datos.md](./03_Modelo_Base_Datos.md) — Esquema de la base de datos. Todas las tablas, columnas, tipos, restricciones y relaciones entre entidades.
 
+- [04_Senders_Menus.md](./04_Senders_Menus.md) — Guía para crear senders de menús (proveedores de datos) para Sidebar y Tabs. Flujo completo de datos desde Backend hasta Frontend.
+
+- [05_Reglas_Themes_Tipografia.md](./05_Reglas_Themes_Tipografia.md) — Reglas obligatorias para trabajar con el sistema de temas (`react_vite/src/theme`) y tipografía (`react_vite/src/styles/ds-typography.css`).
+
 ---
 
 ## Módulos actuales del sistema

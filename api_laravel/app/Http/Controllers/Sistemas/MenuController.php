@@ -40,11 +40,12 @@ class MenuController extends Controller
             'order' => 'nullable|integer',
             'module' => 'nullable|string|max:255',
             'is_active' => 'nullable|boolean',
+            'menu_type' => 'nullable|in:sidebar,tab',
             'roles' => 'array',
             'roles.*' => 'exists:roles,id',
         ]);
 
-        $menu = Menu::create($request->only(['name', 'url', 'icon', 'parent_id', 'order', 'module', 'is_active']));
+        $menu = Menu::create($request->only(['name', 'url', 'icon', 'parent_id', 'order', 'module', 'is_active', 'menu_type']));
 
         if ($request->has('roles')) {
             $menu->roles()->sync($request->roles);
@@ -81,11 +82,12 @@ class MenuController extends Controller
             'order' => 'nullable|integer',
             'module' => 'nullable|string|max:255',
             'is_active' => 'nullable|boolean',
+            'menu_type' => 'nullable|in:sidebar,tab',
             'roles' => 'sometimes|array',
             'roles.*' => 'exists:roles,id',
         ]);
 
-        $menu->update($request->only(['name', 'url', 'icon', 'parent_id', 'order', 'module', 'is_active']));
+        $menu->update($request->only(['name', 'url', 'icon', 'parent_id', 'order', 'module', 'is_active', 'menu_type']));
 
         if ($request->has('roles')) {
             $menu->roles()->sync($request->roles);
@@ -143,9 +145,10 @@ class MenuController extends Controller
         }
         $menuIds = array_unique($menuIds);
 
-        // Obtener menús únicos y ordenados
+        // Obtener menús únicos y ordenados (solo menús de sidebar)
         $menus = Menu::whereIn('id', $menuIds)
             ->where('is_active', true)
+            ->where('menu_type', 'sidebar')
             ->orderBy('order')
             ->get();
 
@@ -311,6 +314,67 @@ class MenuController extends Controller
             'success' => true,
             'message' => 'Menú reordenado correctamente',
             'data' => $menu
+        ]);
+    }
+
+    /**
+     * Obtener tabs según el rol del usuario autenticado para una página específica
+     *
+     * @param Request $request
+     * @param int $parentMenuId ID del menú padre (página)
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTabsByPage(Request $request, $parentMenuId)
+    {
+        $user = $request->user();
+        
+        if (!$user) {
+            return response()->json([
+                'success' => true,
+                'data' => ['tabs' => []]
+            ]);
+        }
+
+        $roles = $user->roles;
+        
+        if ($roles->isEmpty()) {
+            return response()->json([
+                'success' => true,
+                'data' => ['tabs' => []]
+            ]);
+        }
+
+        // Obtener todos los menús de los roles del usuario
+        $menuIds = [];
+        foreach ($roles as $role) {
+            $roleMenuIds = $role->menus()->pluck('menus.id')->toArray();
+            $menuIds = array_merge($menuIds, $roleMenuIds);
+        }
+        $menuIds = array_unique($menuIds);
+
+        // Obtener tabs (menús de tipo 'tab') que son hijos del menú padre
+        $tabs = Menu::whereIn('id', $menuIds)
+            ->where('parent_id', $parentMenuId)
+            ->where('menu_type', 'tab')
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
+        // Formatear tabs para el frontend
+        $formattedTabs = $tabs->map(function ($tab) {
+            return [
+                'id' => $tab->id,
+                'key' => $tab->id,
+                'label' => $tab->name,
+                'url' => $tab->url,
+                'icon' => $tab->icon,
+                'order' => $tab->order,
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => ['tabs' => $formattedTabs]
         ]);
     }
 }

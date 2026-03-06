@@ -269,3 +269,77 @@ function titleFromRoute(route) {
     const cleaned = last.replace(/[-_]+/g, ' ');
     return cleaned.replace(/\b\w/g, (char) => char.toUpperCase());
 }
+
+/**
+ * Obtener tabs dinámicos según el rol del usuario para una página específica
+ * @param {number} parentMenuId - ID del menú padre (página)
+ * @returns {Promise<Array>} - Array de tabs con formato {id, key, label, url, icon, order}
+ */
+export async function getTabsByPage(parentMenuId) {
+    try {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            console.warn('No auth token found');
+            return [];
+        }
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sistemas/menus/${parentMenuId}/tabs`, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const result = await response.json();
+        
+        if (result.success && result.data && result.data.tabs) {
+            // Formatear tabs para el componente DSTabs
+            return result.data.tabs.map(tab => ({
+                key: String(tab.id),
+                label: tab.label,
+                icon: tab.icon ? getMenuIconComponent(tab.icon) : null,
+                url: tab.url,
+                order: tab.order
+            }));
+        }
+        
+        return [];
+    } catch (error) {
+        console.error('Error fetching tabs by page:', error);
+        return [];
+    }
+}
+
+/**
+ * Obtener ID del menú principal basado en la ruta actual
+ * @param {string} route - Ruta actual (ej: '/sistemas/configuracion')
+ * @returns {number|null} - ID del menú padre o null
+ */
+export function getParentMenuIdByRoute(route) {
+    try {
+        const menus = getStoredMenu();
+        if (!Array.isArray(menus)) return null;
+
+        for (const menu of menus) {
+            const menuRoute = menu.rutaReact || menu.url;
+            if (menuRoute && menuRoute === route) {
+                return menu.codMenu || menu.id;
+            }
+
+            // También buscar en submenús
+            if (menu.submenus && Array.isArray(menu.submenus)) {
+                for (const sub of menu.submenus) {
+                    const subRoute = sub.rutaReact || sub.url;
+                    if (subRoute && subRoute === route) {
+                        return menu.codMenu || menu.id;
+                    }
+                }
+            }
+        }
+
+        return null;
+    } catch (error) {
+        console.error('Error getting parent menu id by route:', error);
+        return null;
+    }
+}
