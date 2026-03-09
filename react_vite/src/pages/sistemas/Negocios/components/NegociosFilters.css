@@ -5,19 +5,21 @@
 
 .negocios-filters {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 12px;
     padding: 16px;
-    background: var(--ds-surfaceBg, #f9fafb);
+    background: var(--ds-surfaceBg, #f8fafc);
     border-radius: 8px;
-    margin-bottom: 16px;
+    border: 1px solid var(--ds-surfaceBorder, #e2e8f0);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
 }
 
 .negocios-filters__search {
     position: relative;
     flex: 1;
-    min-width: 200px;
+    min-width: 250px;
+    max-width: 400px;
 }
 
 .negocios-filters__search-icon {
@@ -25,24 +27,25 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--ds-secondaryText, #6b7280);
+    color: var(--ds-secondaryText, #64748b);
     pointer-events: none;
 }
 
 .negocios-filters__search-input {
     width: 100%;
-    padding: 10px 36px 10px 36px;
-    border: 1px solid var(--ds-surfaceBorder, #e5e7eb);
+    padding: 10px 36px 10px 40px;
+    border: 1px solid var(--ds-fieldBorder, #d1d5db);
     border-radius: 6px;
-    font-size: var(--ds-font-sm);
-    background: var(--ds-panelBg, #ffffff);
-    color: var(--ds-primaryText, #111827);
-    transition: border-color 0.2s;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: var(--ds-fieldBg, #fff);
+    color: var(--ds-fieldText, #0f172a);
 }
 
 .negocios-filters__search-input:focus {
     outline: none;
-    border-color: var(--ds-accent, #3b82f6);
+    border-color: var(--ds-activeBg, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .negocios-filters__search-input::placeholder {
@@ -56,24 +59,24 @@
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: var(--ds-secondaryText, #6b7280);
+    color: var(--ds-secondaryText, #64748b);
     cursor: pointer;
     padding: 4px;
-    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
 .negocios-filters__clear-search:hover {
-    background: var(--ds-surfaceBorder, #e5e7eb);
-    color: var(--ds-primaryText, #111827);
+    background: var(--ds-hoverBg, #e2e8f0);
+    color: var(--ds-primaryText, #334155);
 }
 
 .negocios-filters__select-wrapper {
     position: relative;
-    min-width: 140px;
+    min-width: 180px;
 }
 
 .negocios-filters__select-icon {
@@ -81,46 +84,48 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--ds-secondaryText, #6b7280);
+    color: var(--ds-secondaryText, #64748b);
     pointer-events: none;
     z-index: 1;
 }
 
 .negocios-filters__select {
     width: 100%;
-    padding: 10px 12px 10px 36px;
-    border: 1px solid var(--ds-surfaceBorder, #e5e7eb);
+    padding: 10px 12px 10px 40px;
+    border: 1px solid var(--ds-fieldBorder, #d1d5db);
     border-radius: 6px;
-    font-size: var(--ds-font-sm);
-    background: var(--ds-panelBg, #ffffff);
-    color: var(--ds-primaryText, #111827);
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: var(--ds-fieldBg, #fff);
+    color: var(--ds-fieldText, #0f172a);
     cursor: pointer;
-    transition: border-color 0.2s;
     appearance: none;
 }
 
 .negocios-filters__select:focus {
     outline: none;
-    border-color: var(--ds-accent, #3b82f6);
+    border-color: var(--ds-activeBg, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .negocios-filters__clear-all {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 12px;
-    background: var(--ds-surfaceBorder, #e5e7eb);
+    padding: 10px 16px;
+    background: var(--ds-hoverBg, #e2e8f0);
     border: none;
     border-radius: 6px;
-    font-size: var(--ds-font-xs);
-    color: var(--ds-primaryText, #111827);
+    font-size: 13px;
+    color: var(--ds-primaryText, #334155);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 .negocios-filters__clear-all:hover {
-    background: var(--ds-secondaryText, #9ca3af);
-    color: var(--ds-panelBg, #ffffff);
+    background: var(--ds-secondaryText, #64748b);
+    color: var(--ds-panelBg, #fff);
 }
 
 .negocios-filters__badge {
@@ -130,7 +135,7 @@
     padding: 8px 12px;
     background: var(--ds-accentBg, rgba(59, 130, 246, 0.1));
     border-radius: 6px;
-    font-size: var(--ds-font-xs);
+    font-size: 13px;
     color: var(--ds-accent, #3b82f6);
     font-weight: 500;
 }

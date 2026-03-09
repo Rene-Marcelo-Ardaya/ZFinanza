@@ -72,11 +72,11 @@ export function useNegocios() {
     }, [negocios, searchText, statusFilter]);
 
     // 6. FORM HANDLERS
-    const handleChange = useCallback((e) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = useCallback((fieldName) => (e) => {
+        const { value, type, checked } = e.target;
         setForm(prev => ({
             ...prev,
-            [name]: type === 'checkbox' ? checked : value
+            [fieldName]: type === 'checkbox' ? checked : value
         }));
     }, []);
 

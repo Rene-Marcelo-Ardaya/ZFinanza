@@ -8,6 +8,7 @@ import {
 } from '../../../../ds-components';
 import { NegociosFilters } from './NegociosFilters';
 import { NegocioCard } from './NegocioCard';
+import './NegociosFilters.css';
 
 export function NegociosTable({
     negocios,
