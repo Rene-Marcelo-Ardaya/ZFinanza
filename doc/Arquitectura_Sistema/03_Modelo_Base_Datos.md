@@ -165,11 +165,35 @@ Registro histórico de accesos por PIN.
 
 ---
 
+## Módulo: Negocios
+
+### negocios
+Negocios o empresas registradas en el sistema.
+- id (PK)
+- nombre (varchar 100)
+- is_active (boolean, default: true)
+- timestamps
+
+### base_datos
+Configuraciones de bases de datos externas.
+- id (PK)
+- nombre (varchar 100)
+- descripcion (text, nullable)
+- host (string)
+- puerto (integer)
+- usuario_bd (string)
+- password_bd (string)
+- activo (boolean, default: true)
+- timestamps
+
+---
+
 ## Tablas Pivot (N:M)
 
 - role_user → roles ↔ users
 - permission_role → permissions ↔ roles
 - menu_role → menus ↔ roles
+- negocio_user → negocios ↔ users
 
 ---
 
@@ -185,6 +209,8 @@ Registro histórico de accesos por PIN.
 - Un `user` puede estar vinculado a un `personal` (id_personal)
 - Un `personal` tiene muchos registros en `personal_pin_acceso`
 - Un `componente_seguridad` pertenece a un `nivel_seguridad`
+- Un `user` puede tener muchos `negocios` (N:M via negocio_user)
+- Un `negocio` puede tener muchos `users` (N:M via negocio_user)
 
 ---
 

@@ -6,7 +6,7 @@
  * Add your pages here as needed.
  */
 import { lazy } from 'react';
-import { 
+import {
   DASHBOARD_ROUTE,
   USERS_ROUTE,
   ROLES_ROUTE,
@@ -16,7 +16,8 @@ import {
   SECURITY_LEVELS_ROUTE,
   PIN_ACCESS_ROUTE,
   PERSONAL_ROUTE,
-  CARGOS_ROUTE
+  CARGOS_ROUTE,
+  NEGOCIOS_ROUTE
 } from './routes';
 
 // Helper function to create page entries
@@ -80,6 +81,10 @@ export const PAGE_REGISTRY = {
   ),
   [CARGOS_ROUTE]: page(
     lazyNamed(() => import('../pages/rrhh/Cargos/CargosPage'), 'CargosPage'),
+    buildDefaultProps,
+  ),
+  [NEGOCIOS_ROUTE]: page(
+    lazyNamed(() => import('../pages/sistemas/Negocios/NegociosPage'), 'NegociosPage'),
     buildDefaultProps,
   ),
 };

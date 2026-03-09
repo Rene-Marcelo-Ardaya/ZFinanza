@@ -1,0 +1,36 @@
+/* ============================================
+   NegociosPage - Estilos específicos
+   ============================================ */
+
+.negocios-alert-margin {
+    margin-bottom: 16px;
+}
+
+.negocios-panel__count {
+    font-size: var(--ds-font-sm);
+    color: var(--ds-secondaryText);
+    font-weight: 500;
+}
+
+/* Formulario */
+.negocios-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.negocios-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: var(--ds-font-md);
+    color: var(--ds-primaryText);
+}
+
+.negocios-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--ds-accent);
+    cursor: pointer;
+}

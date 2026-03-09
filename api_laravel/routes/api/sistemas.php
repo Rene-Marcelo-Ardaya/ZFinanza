@@ -7,6 +7,7 @@ use App\Http\Controllers\Sistemas\MenuController;
 use App\Http\Controllers\Sistemas\SettingController;
 use App\Http\Controllers\Sistemas\NivelSeguridadController;
 use App\Http\Controllers\Sistemas\ComponenteSeguridadController;
+use App\Http\Controllers\Sistemas\NegocioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,4 +127,16 @@ Route::prefix('componentes-seguridad')->group(function () {
     Route::get('/', [ComponenteSeguridadController::class, 'index']);
     Route::post('/', [ComponenteSeguridadController::class, 'upsert']);
     Route::delete('/{componenteId}', [ComponenteSeguridadController::class, 'destroy']);
+});
+
+// -------------------------------------------------------------------------
+// Negocios
+// -------------------------------------------------------------------------
+Route::prefix('negocios')->group(function () {
+    Route::get('/activos', [NegocioController::class, 'listActive']);
+    Route::get('/', [NegocioController::class, 'index']);
+    Route::post('/', [NegocioController::class, 'store']);
+    Route::get('/{id}', [NegocioController::class, 'show'])->where('id', '[0-9]+');
+    Route::put('/{id}', [NegocioController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('/{id}', [NegocioController::class, 'destroy'])->where('id', '[0-9]+');
 });

@@ -1,0 +1,69 @@
+/**
+ * NegocioCard.css
+ * Estilos para las cards de negocios en vista móvil
+ */
+
+.negocio-card {
+    background: var(--ds-panelBg, #ffffff);
+    border: 1px solid var(--ds-surfaceBorder, #e5e7eb);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.negocio-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.negocio-card--inactivo {
+    opacity: 0.7;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+/* Header */
+.negocio-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ds-surfaceBorder, #f3f4f6);
+}
+
+.negocio-card__id {
+    font-size: 0.75rem;
+    color: var(--ds-secondaryText, #6b7280);
+    font-weight: 500;
+}
+
+/* Body */
+.negocio-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.negocio-card__nombre {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ds-primaryText, #111827);
+    margin: 0;
+}
+
+/* Footer */
+.negocio-card__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+    border-top: 1px solid var(--ds-surfaceBorder, #f3f4f6);
+}
+
+.negocio-card__actions {
+    display: flex;
+    gap: 8px;
+}

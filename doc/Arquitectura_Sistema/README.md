@@ -22,6 +22,7 @@ Documentación técnica de referencia para el sistema. Consultar estos archivos 
 
 - **Sistemas** — Usuarios, Roles, Permisos, Menús, Configuraciones (Settings), Seguridad por componente (SecuredButton System).
 - **RRHH** — Cargos, Personal, accesos por PIN y ubicaciones.
+- **Negocios** — Negocios/Empresas, Bases de datos externas, conexión usuarios-negocios.
 
 ---
 

@@ -45,6 +45,13 @@ class User extends Authenticatable
         return $this->belongsTo(Personal::class, 'id_personal');
     }
 
+    public function negocios()
+    {
+        return $this->belongsToMany(Negocio::class, 'negocio_user')
+            ->withTimestamps()
+            ->withPivot('id');
+    }
+
     public function hasRole($role)
     {
         return $this->roles()->where('slug', $role)->exists();

@@ -22,6 +22,9 @@ export const PIN_ACCESS_ROUTE = '/sistemas/pin-acceso';
 export const PERSONAL_ROUTE = '/rrhh/personal';
 export const CARGOS_ROUTE = '/rrhh/cargos';
 
+// Negocios routes
+export const NEGOCIOS_ROUTE = '/sistemas/negocios';
+
 // Frontend routes - Add your routes here
 export const FRONTEND_ROUTES = [
   DASHBOARD_ROUTE,
@@ -34,6 +37,7 @@ export const FRONTEND_ROUTES = [
   PIN_ACCESS_ROUTE,
   PERSONAL_ROUTE,
   CARGOS_ROUTE,
+  NEGOCIOS_ROUTE,
   // Add more routes as needed
 ];
 
