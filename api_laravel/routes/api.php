@@ -73,6 +73,14 @@ Route::middleware('auth:sanctum')->group(function () {
     // Módulo: Sistemas (Usuarios, Roles, Menús, Seguridad)
     // Archivo: routes/api/sistemas.php
     // =====================================================================
-    require base_path('routes/api/sistemas.php');
+    Route::prefix('sistemas')->group(function () {
+        require base_path('routes/api/sistemas.php');
+    });
+
+    // =====================================================================
+    // Módulo: Finanzas (Configuración de cuentas)
+    // Archivo: routes/api/finanzas.php
+    // =====================================================================
+    require base_path('routes/api/finanzas.php');
 
 });

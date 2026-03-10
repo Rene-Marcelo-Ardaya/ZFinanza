@@ -17,7 +17,8 @@ import {
   PIN_ACCESS_ROUTE,
   PERSONAL_ROUTE,
   CARGOS_ROUTE,
-  NEGOCIOS_ROUTE
+  NEGOCIOS_ROUTE,
+  FINANZAS_CONFIGURACION_ROUTE
 } from './routes';
 
 // Helper function to create page entries
@@ -85,6 +86,12 @@ export const PAGE_REGISTRY = {
   ),
   [NEGOCIOS_ROUTE]: page(
     lazyNamed(() => import('../pages/sistemas/Negocios/NegociosPage'), 'NegociosPage'),
+    buildDefaultProps,
+  ),
+
+  // Finanzas
+  [FINANZAS_CONFIGURACION_ROUTE]: page(
+    lazyNamed(() => import('../pages/finanzas/Configuracion/ConfiguracionPage'), 'ConfiguracionPage'),
     buildDefaultProps,
   ),
 };

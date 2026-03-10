@@ -45,7 +45,11 @@ export function DSTabs({
               className={`ds-tabs__tab ${isActive ? 'is-active' : ''}`}
               onClick={() => handleSelect(key)}
             >
-              {tab.icon && <span className="ds-tabs__icon">{tab.icon}</span>}
+              {tab.icon && (
+                <span className="ds-tabs__icon">
+                  {React.isValidElement(tab.icon) ? tab.icon : React.createElement(tab.icon, { size: 18 })}
+                </span>
+              )}
               <span className="ds-tabs__label">{tab.label}</span>
             </button>
           )

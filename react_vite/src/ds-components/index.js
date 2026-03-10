@@ -48,6 +48,7 @@ export { DSTextArea as DSTextarea } from '../ds-forms';
 export {
   DSPanel,
   DSTabs,
+  DSTabsByRole,
   DSAccordion,
   DSBorderLayout,
   DSPage,

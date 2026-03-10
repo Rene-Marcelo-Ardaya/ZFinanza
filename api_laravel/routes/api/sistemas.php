@@ -68,21 +68,16 @@ Route::prefix('permissions')->group(function () {
 // -------------------------------------------------------------------------
 // Menús
 // -------------------------------------------------------------------------
+// IMPORTANTE: Las rutas con sufijo (/tabs, /reorder, etc.) van ANTES del apiResource
+// para evitar que {menu} las capture primero.
 Route::get('/menus/icons', [MenuController::class, 'getAvailableIcons']);
 Route::get('/menus/parents', [MenuController::class, 'getParentMenus']);
 Route::put('/menus/positions', [MenuController::class, 'updatePositions']);
+Route::get('/menus/por-rol', [MenuController::class, 'menusPorRol']);
+Route::get('/menus/tree', [MenuController::class, 'tree']);
+Route::get('/menus/{parentMenuId}/tabs', [MenuController::class, 'getTabsByPage'])->where('parentMenuId', '[0-9]+');
+Route::put('/menus/{id}/reorder', [MenuController::class, 'reorder'])->where('id', '[0-9]+');
 Route::apiResource('menus', MenuController::class);
-Route::prefix('menus')->group(function () {
-    Route::get('/', [MenuController::class, 'index']);
-    Route::post('/', [MenuController::class, 'store']);
-    Route::get('/por-rol', [MenuController::class, 'menusPorRol']);
-    Route::get('/tree', [MenuController::class, 'tree']);
-    Route::get('/{id}', [MenuController::class, 'show'])->where('id', '[0-9]+');
-    Route::put('/{id}', [MenuController::class, 'update'])->where('id', '[0-9]+');
-    Route::delete('/{id}', [MenuController::class, 'destroy'])->where('id', '[0-9]+');
-    Route::put('/{id}/reorder', [MenuController::class, 'reorder'])->where('id', '[0-9]+');
-    Route::get('/{parentMenuId}/tabs', [MenuController::class, 'getTabsByPage'])->where('parentMenuId', '[0-9]+');
-});
 
 // -------------------------------------------------------------------------
 // Settings / Configuración

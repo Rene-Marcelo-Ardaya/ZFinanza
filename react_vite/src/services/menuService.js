@@ -14,6 +14,7 @@
 import * as LucideIcons from 'lucide-react';
 import { Home, MessageCircle, Folder, FileText } from 'lucide-react';
 import { DASHBOARD_ROUTE } from '../app/routes';
+import CONFIG from '../config';
 
 const MENU_STORAGE_KEY = 'userMenu';
 
@@ -283,7 +284,7 @@ export async function getTabsByPage(parentMenuId) {
             return [];
         }
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sistemas/menus/${parentMenuId}/tabs`, {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/sistemas/menus/${parentMenuId}/tabs`, {
             headers: {
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -328,10 +329,13 @@ export function getParentMenuIdByRoute(route) {
 
             // También buscar en submenús
             if (menu.submenus && Array.isArray(menu.submenus)) {
-                for (const sub of menu.submenus) {
+                for (let i = 0; i < menu.submenus.length; i++) {
+                    const sub = menu.submenus[i];
                     const subRoute = sub.rutaReact || sub.url;
                     if (subRoute && subRoute === route) {
-                        return menu.codMenu || menu.id;
+                        // Retornar siempre el ID del submenú: los tabs son hijos de él,
+                        // no del menú padre (los tabs no aparecen en localStorage por ser tipo 'tab')
+                        return sub.codSubMenu || sub.id;
                     }
                 }
             }

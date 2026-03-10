@@ -25,6 +25,9 @@ export const CARGOS_ROUTE = '/rrhh/cargos';
 // Negocios routes
 export const NEGOCIOS_ROUTE = '/sistemas/negocios';
 
+// Finanzas routes
+export const FINANZAS_CONFIGURACION_ROUTE = '/finanzas/configuracion';
+
 // Frontend routes - Add your routes here
 export const FRONTEND_ROUTES = [
   DASHBOARD_ROUTE,
@@ -38,6 +41,7 @@ export const FRONTEND_ROUTES = [
   PERSONAL_ROUTE,
   CARGOS_ROUTE,
   NEGOCIOS_ROUTE,
+  FINANZAS_CONFIGURACION_ROUTE,
   // Add more routes as needed
 ];
 

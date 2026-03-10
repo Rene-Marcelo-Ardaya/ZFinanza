@@ -20,24 +20,15 @@ class MenusSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $menusData = [
-            // 1. Dashboard
-            [
-                'name' => 'Dashboard',
-                'url' => '/',
-                'icon' => 'LayoutDashboard',
-                'order' => 1,
-                'module' => 'HOME',
-                'is_active' => true,
-                'children' => []
-            ],
-            // 2. Configuración (padre único para menús básicos)
+            // 1. Configuración (padre único para menús básicos)
             [
                 'name' => 'Configuración',
                 'url' => null,
                 'icon' => 'Settings',
-                'order' => 2,
+                'order' => 1,
                 'module' => 'SISTEMAS',
                 'is_active' => true,
+                'menu_type' => 'sidebar',
                 'children' => [
                     [
                         'name' => 'Personal',
@@ -104,24 +95,53 @@ class MenusSeeder extends Seeder
                         'is_active' => true,
                     ]
                 ]
+            ],
+            // 2. FINANZAS (módulo de finanzas)
+            [
+                'name' => 'FINANZAS',
+                'url' => null,
+                'icon' => 'Wallet',
+                'order' => 2,
+                'module' => 'FINANZAS',
+                'is_active' => true,
+                'menu_type' => 'sidebar',
+                'children' => [
+                    [
+                        'name' => 'Configuración',
+                        'url' => '/finanzas/configuracion',
+                        'icon' => 'Settings',
+                        'order' => 1,
+                        'module' => 'FINANZAS',
+                        'is_active' => true,
+                        'menu_type' => 'sidebar',
+                        'children' => [
+                            [
+                                'name' => 'Centro de cuentas',
+                                'url' => '/finanzas/configuracion',
+                                'icon' => 'Building2',
+                                'order' => 1,
+                                'module' => 'FINANZAS',
+                                'is_active' => true,
+                                'menu_type' => 'tab',
+                            ],
+                            [
+                                'name' => 'Cuentas',
+                                'url' => '/finanzas/configuracion',
+                                'icon' => 'CreditCard',
+                                'order' => 2,
+                                'module' => 'FINANZAS',
+                                'is_active' => true,
+                                'menu_type' => 'tab',
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ];
 
         $createdMenuIds = [];
 
-        foreach ($menusData as $menuData) {
-            $children = $menuData['children'] ?? [];
-            unset($menuData['children']);
-
-            $parent = Menu::create($menuData);
-            $createdMenuIds[] = $parent->id;
-
-            foreach ($children as $childData) {
-                $childData['parent_id'] = $parent->id;
-                $child = Menu::create($childData);
-                $createdMenuIds[] = $child->id;
-            }
-        }
+        $this->createMenusRecursively($menusData, $createdMenuIds, null);
 
         // Asignar todos los menús creados al rol super-admin (ID 1)
         $superAdminRole = Role::find(1);
@@ -130,6 +150,31 @@ class MenusSeeder extends Seeder
             $this->command->info('Menús base creados y asignados al rol super-admin.');
         } else {
             $this->command->warn('Rol super-admin no encontrado. Los menús fueron creados pero no asignados.');
+        }
+    }
+
+    /**
+     * Crear menús recursivamente para soportar múltiples niveles de anidación
+     */
+    private function createMenusRecursively(array $menusData, array &$createdMenuIds, $parentId = null): void
+    {
+        foreach ($menusData as $menuData) {
+            $children = $menuData['children'] ?? [];
+            unset($menuData['children']);
+
+            // Asignar parent_id si existe
+            if ($parentId !== null) {
+                $menuData['parent_id'] = $parentId;
+            }
+
+            // Crear el menú
+            $menu = Menu::create($menuData);
+            $createdMenuIds[] = $menu->id;
+
+            // Crear hijos recursivamente
+            if (!empty($children)) {
+                $this->createMenusRecursively($children, $createdMenuIds, $menu->id);
+            }
         }
     }
 }
