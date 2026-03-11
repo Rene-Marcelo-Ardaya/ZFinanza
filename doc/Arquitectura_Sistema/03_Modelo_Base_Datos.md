@@ -188,6 +188,19 @@ Configuraciones de bases de datos externas.
 
 ---
 
+## Módulo: Finanzas
+
+### f_cuentas
+Cuentas financieras del sistema.
+- id (PK)
+- nombre (varchar 255) — nombre de la cuenta
+- descripcion (text, nullable) — descripción opcional
+- is_active (boolean, default: true) — estado activo/inactivo
+- timestamps
+- índices: is_active, nombre
+
+---
+
 ## Tablas Pivot (N:M)
 
 - role_user → roles ↔ users
@@ -213,5 +226,14 @@ Configuraciones de bases de datos externas.
 - Un `negocio` puede tener muchos `users` (N:M via negocio_user)
 
 ---
+
+## Módulo: Finanzas
+
+### f_cuentas
+- Tabla principal de cuentas financieras
+- Campos: id, nombre, descripcion, is_active, timestamps
+- Índices: is_active, nombre
+- Scopes: active(), search()
+
 
 > Para nuevos módulos: crear una migración consolidada en `database/migrations/` con el prefijo de fecha y nombre descriptivo, ej: `2026_04_01_000001_create_ventas_tables.php`.

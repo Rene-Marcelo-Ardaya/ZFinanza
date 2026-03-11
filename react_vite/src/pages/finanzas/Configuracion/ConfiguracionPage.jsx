@@ -8,8 +8,17 @@ import {
 
 import './ConfiguracionPage.css';
 
+// Páginas
+import { CuentasPage } from './Cuentas/CuentasPage';
+
 export function ConfiguracionPage() {
     const renderTabContent = (tab) => {
+        // Tab de Cuentas - verificar por URL o label
+        if (tab.url?.includes('/cuentas') || tab.label?.toLowerCase() === 'cuentas') {
+            return <CuentasPage />;
+        }
+
+        // Otros tabs en progreso
         return (
             <div className="finanzas-configuracion-content">
                 <div className="finanzas-en-progreso">
@@ -31,7 +40,7 @@ export function ConfiguracionPage() {
 
             <DSTabsByRole
                 route="/finanzas/configuracion"
-                renderContent={renderTabContent}
+                renderTabContent={renderTabContent}
             />
         </DSPage>
     );

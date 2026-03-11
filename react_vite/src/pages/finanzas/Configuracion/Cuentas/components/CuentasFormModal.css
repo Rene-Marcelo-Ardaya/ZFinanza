@@ -1,0 +1,31 @@
+/* ============================================
+   CuentasFormModal - Estilos específicos
+   ============================================ */
+
+.cuentas-alert-margin {
+    margin-bottom: 16px;
+}
+
+/* Formulario */
+.cuentas-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cuentas-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.cuentas-form__toggle {
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ds-border, #e5e7eb);
+}
+
+@media (max-width: 768px) {
+    .cuentas-textarea {
+        min-height: 80px;
+    }
+}

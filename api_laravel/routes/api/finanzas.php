@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Finanzas\CuentaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +17,14 @@ use Illuminate\Support\Facades\Route;
 // -------------------------------------------------------------------------
 // Rutas del módulo Finanzas
 // -------------------------------------------------------------------------
-// Por ahora no hay rutas específicas, solo se usa para la estructura de menús
-// Las rutas se agregarán cuando se implemente la funcionalidad completa
+
+// Rutas para Cuentas
+Route::prefix('cuentas')->group(function () {
+    Route::get('/', [CuentaController::class, 'index']);
+    Route::get('/combo', [CuentaController::class, 'combo']);
+    Route::post('/', [CuentaController::class, 'store']);
+    Route::get('/{cuenta}', [CuentaController::class, 'show']);
+    Route::put('/{cuenta}', [CuentaController::class, 'update']);
+    Route::put('/{cuenta}/activate', [CuentaController::class, 'activate']);
+    Route::delete('/{cuenta}', [CuentaController::class, 'destroy']);
+});

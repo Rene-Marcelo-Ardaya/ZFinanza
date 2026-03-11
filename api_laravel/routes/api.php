@@ -81,6 +81,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Módulo: Finanzas (Configuración de cuentas)
     // Archivo: routes/api/finanzas.php
     // =====================================================================
-    require base_path('routes/api/finanzas.php');
+    Route::prefix('finanzas')->group(function () {
+        require base_path('routes/api/finanzas.php');
+    });
 
 });

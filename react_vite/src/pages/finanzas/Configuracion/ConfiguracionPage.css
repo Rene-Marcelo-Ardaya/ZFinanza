@@ -53,3 +53,8 @@
     color: var(--ds-primary);
     font-weight: 600;
 }
+
+/* Alertas */
+.finanzas-alert-margin {
+    margin-bottom: 16px;
+}
